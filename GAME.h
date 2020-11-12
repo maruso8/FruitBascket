@@ -34,9 +34,6 @@ private:
 
 	char Id = 'a';
 
-	char iId = 'a';
-
-	
 	int GameCheck = 0;
 	int TimeCnt = 0;
 	float SelectHeight = 0;

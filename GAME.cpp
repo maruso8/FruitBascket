@@ -152,8 +152,8 @@ void GAME::main() {
 
 			if (FallItemCnt == 0) {
 
-				iId = check->itemIdCheck(rand() % 4);
-				FallManeger->appear(iId);
+				Id = check->itemIdCheck(rand() % 4);
+				FallManeger->appear(Id);
 
 				FallItemCnt = rand() % 60 + 120;
 			}
