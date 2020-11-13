@@ -23,7 +23,7 @@ class CONTAINER {
 	int NumData = 0;
 
 public:
-
+	CONTAINER();
 	~CONTAINER();
 	//ファイルからデータを読み込む
 	int LoadData(const char* filename);
@@ -31,11 +31,14 @@ public:
 	int getIData(const char* name);
 	//データをfloat値で取得
 	float getFData(const char* name);
-
 	//ファイルにデータを書き込む
 	int saveData(const char* filename, int score);
 
+
+
+	//ここからCONTAINER外のデータ------------------------------------------------
 	//SYSTEM
+
 	const int windowWidht = 1920;//1920
 	const int windowHeight = 1080;//1080
 	const int fallCnt = 100;
@@ -45,6 +48,7 @@ public:
 	COLOR fadeColor = COLOR(1, 1, 1, 0);
 	float fadeDecayAlpha = 1.0f / 50.0f;
 
+	//タイトル関連----------------------------------------------------------------
 	//BACK_GROUND
 	int backGroundImg = 0;
 	int gameBackGroundImg = 0;
@@ -55,7 +59,7 @@ public:
 
 	//TITLE
 	int titleImg = 0;
-	const float titlePx = 1200.0f;
+	const float titlePx = 1120.0f;
 	const float titlePy = 0.0f;
 	const int titleNum = 1;
 
@@ -70,7 +74,7 @@ public:
 	const COLOR selectColor = COLOR(1.0f, 1.0f, 1.0f, 0.5f);
 	const int selectNum = 4;
 
-	//fream
+	//FREAM
 	int freamImg = 0;
 	const float freamPx=500.0f;
 	const float freamPy=50.0f;
@@ -94,8 +98,12 @@ public:
 	const float signalPy = 425.0f;
 	const int signalNum = 1;
 
+
+	//ゲームプレイ関連---------------------------------------------------
 	//GAME_PLAY
-	int scoreImg[10] = { 0 };
+	int scoreImg = 0;
+	int scoreNumImg[10] = { 0 };
+	const int NumOfNum = 10;
 	const float scorePx = 225.0f;
 	const float scorePy = 0.0f;
 	const float timePx = 0.0f;
@@ -194,55 +202,20 @@ public:
 	const float shoesDownAlpha = 0.0f;
 
 
-	CONTAINER() {
-		//タイトルと画面の大きさ
-		initialize("体験ばーん", windowWidht, windowHeight,FULLSCREEN);
-		//画像ロード-------------------------------------------------------------
-		//タイトル画像ロード
-		backGroundImg = loadImage("タイトル画面.png");
-		titleImg = loadImage("フルバケ.png");
-		for (int i = 0; i < TotalSelect; i++) {
-			sprintf_s(selectName, "%s_%d.png", "aka", i);
-			selectImg[i] = loadImage(selectName);
-		}
-		selectFleamImg = loadImage("タイトルうふふ.png");
-		howToPlayImg = loadImage("play.png");
-		creditImg = loadImage("S.jpg");
-		signalImg = loadImage("矢印.png");
+	//スコア関連-------------------------------------------------------
+	//SCORE
+	int scoreFreamImg = 0;
+	const int rankNum = 3;
+	const float rankPx = 900.0f;
+	const float rankPy = 150.0f;
+	const float rankWidth = 75.0f;
+	const float scoreImgPx = 600.0f;
+	const float scoreImgPy = 150.0f;
+	const float scoreSpace = 200.0f;
+	const float PlayerScorePx = 700.0f;
+	const float PlayerScorePy = 800.0f;
 
-		fadeinImg = loadImage("フェードイン.png");
-		freamImg = loadImage("遊び方の枠背景.png");
 
-		//ゲームメイン画像ロード
-		gameBackGroundImg = loadImage("ゲーム背景.png");
-		playerImg = loadImage("プレイヤー.png");
-
-		//スコア画像ロード
-		int AllNumImg = loadImage("suuzi.png");
-		for (int i = 0; i < 10; i++) {
-			scoreImg[i] = divideImage(AllNumImg, 75 * i, 0, 75, 75);
-		}
-
-		//フルーツ画像ロード
-		appleImg = loadImage("リンゴ.png");
-		bananaImg = loadImage("バナナ.png");
-		orangeImg = loadImage("ミカン.png");
-		strawberryImg = loadImage("イチゴ.png");
-		rotAppleImg = loadImage("h_ringo.png");
-		rotOrangeImg = loadImage("h_mikan.png");
-		clockUpImg = loadImage("t_up.png");
-		clockDownImg = loadImage("t_down.png");
-		shoesUpImg = loadImage("k_up.png");
-		shoesDownImg = loadImage("k_down.png");
-
-		
-		//CONTAINERを渡すとこ----------------------------------------------------
-		CHARACTER::setContainer(this);
-		FALL::setContainer(this);
-		FALL_MANEGER::setContainer(this);
-		IMG::setContainer(this);
-		TITLE_MANEGER::setContainer(this);
-	}
 
 };
 

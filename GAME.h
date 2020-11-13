@@ -2,19 +2,20 @@
 
 class CONTAINER;
 class CHARACTER;
-class FALL;
 class FALL_MANEGER;
 class CHECK;
 class IMG;
 class TITLE_MANEGER;
 class SCORE;
 class TIME_LIMIT;
+class SCORE_IMG;
 
 class GAME {
 public:
 	GAME();
 	~GAME();
 	void main();
+	void gameInit();
 	bool end();
 
 private:
@@ -22,7 +23,6 @@ private:
 	int flag = 0;
 
 
-	int scoreImage = 0;
 
 	int Bgm = 0;
 
@@ -48,6 +48,7 @@ private:
 	IMG* Fade = 0;
 	SCORE* Score = 0;
 	TIME_LIMIT* TimeLimit = 0;
+	SCORE_IMG* ScoreImg = 0;
 
 
 	enum GAME_START {GAME_START_TITEL,GAME_START_PLAY,GAME_START_SCORE};
@@ -55,7 +56,7 @@ private:
 	enum GAME_LEVEL{GAME_LEVEL_EASY, GAME_LEVEL_NORMAL, GAME_LEVEL_HARD};
 
 
-	GAME_START GameStart = GAME_START_TITEL;//GAME_MAIN_PLAY;
+	GAME_START GameStart = GAME_START_TITEL;//GAME_START_TITEL;
 	GAME_TITEL GameTitel = GAME_PLAY;
 	GAME_LEVEL GameLevel = GAME_LEVEL_EASY;
 };

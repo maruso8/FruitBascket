@@ -84,22 +84,25 @@ char  FALL_MANEGER::collision(float top, float bottom, float left, float right) 
 		if (AllFall[i]->alpha() <= 0.0f) {
 			continue;
 		}
-		if (AllFall[i]->top() > 1200) {
-			AllFall[i]->deleteAlpha();
+		else {
+			if (AllFall[i]->top() > 1200) {
+				AllFall[i]->deleteAlpha();
+			}
+
+
+			if (AllFall[i]->top() < bottom &&
+				top < AllFall[i]->bottom() &&
+				left < AllFall[i]->right() &&
+				AllFall[i]->left() < right) {
+				AllFall[i]->deleteAlpha();
+				return AllFall[i]->id();
+
+			}
+
 		}
-
-
-		if (AllFall[i]->top() < bottom &&
-			top < AllFall[i]->bottom() &&
-			left < AllFall[i]->right() &&
-			AllFall[i]->left() < right) {
-
-			AllFall[i]->deleteAlpha();
-			return AllFall[i]->id();
-
-		}
-
 	}
+	return 0;
+
 
 }
 

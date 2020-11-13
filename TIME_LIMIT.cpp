@@ -7,7 +7,7 @@
 
 TIME_LIMIT::TIME_LIMIT() {
 	for (int i = 0; i < 10; i++) {
-		TimeImg[i] = C->scoreImg[i];
+		TimeImg[i] = C->scoreNumImg[i];
 	}
 	Px = C->timePx;
 	Py = C->timePy;

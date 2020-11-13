@@ -8,5 +8,5 @@ public:
 	SCORE();
 	void scoredraw(int score);
 private:
-	int ScoreImg[10] = { 0 };
+	int ScoreNumImg[10] = { 0 };
 };

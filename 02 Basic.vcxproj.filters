@@ -77,6 +77,9 @@
     <ClCompile Include="main.cpp">
       <Filter>GAME</Filter>
     </ClCompile>
+    <ClCompile Include="SCORE_IMG.cpp">
+      <Filter>SCORE_IMG</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CHECK.h" />
@@ -167,6 +170,9 @@
     <ClInclude Include="DATA.h">
       <Filter>ALL_DATA</Filter>
     </ClInclude>
+    <ClInclude Include="SCORE_IMG.h">
+      <Filter>SCORE_IMG</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -207,6 +213,9 @@
     </Filter>
     <Filter Include="ALL_DATA">
       <UniqueIdentifier>{c22ecd66-0ac0-4a9f-a497-95f2346e06a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SCORE_IMG">
+      <UniqueIdentifier>{913ad683-9e29-440b-84f3-b44c23ddffdf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

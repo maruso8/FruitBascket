@@ -8,6 +8,7 @@ public:
 	virtual void draw(float px = 0);
 	virtual void changeTitleImg() {};
 	virtual void changeGameImg() {};
+	virtual void drawRankScore(int score) {};
 	void fadeIn();
 	void fadeOut();
 	float alpha();

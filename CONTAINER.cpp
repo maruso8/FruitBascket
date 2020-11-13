@@ -9,6 +9,61 @@
 
 
 
+CONTAINER::CONTAINER() {
+	//タイトルと画面の大きさ
+	initialize("体験ばーん", windowWidht, windowHeight, FULLSCREEN);
+	//画像ロード-------------------------------------------------------------
+	//タイトル画像ロード
+	backGroundImg = loadImage("タイトル画面.png");
+	titleImg = loadImage("タイトル.png");
+	for (int i = 0; i < TotalSelect; i++) {
+		sprintf_s(selectName, "%s_%d.png", "aka", i);
+		selectImg[i] = loadImage(selectName);
+	}
+	selectFleamImg = loadImage("タイトルうふふ.png");
+	howToPlayImg = loadImage("play.png");
+	creditImg = loadImage("S.jpg");
+	signalImg = loadImage("矢印.png");
+
+	fadeinImg = loadImage("フェードイン.png");
+	freamImg = loadImage("遊び方の枠背景.png");
+
+	//ゲームメイン画像ロード
+	gameBackGroundImg = loadImage("ゲーム背景.png");
+	playerImg = loadImage("プレイヤー.png");
+
+	//スコア画像ロード
+	scoreImg = loadImage("sukoa.png");
+	int AllNumImg = loadImage("suuzi.png");
+	for (int i = 0; i < 10; i++) {
+		scoreNumImg[i] = divideImage(AllNumImg, 75 * i, 0, 75, 75);
+	}
+
+	//フルーツ画像ロード
+	appleImg = loadImage("リンゴ.png");
+	bananaImg = loadImage("バナナ.png");
+	orangeImg = loadImage("ミカン.png");
+	strawberryImg = loadImage("イチゴ.png");
+	rotAppleImg = loadImage("h_ringo.png");
+	rotOrangeImg = loadImage("h_mikan.png");
+	clockUpImg = loadImage("t_up.png");
+	clockDownImg = loadImage("t_down.png");
+	shoesUpImg = loadImage("k_up.png");
+	shoesDownImg = loadImage("k_down.png");
+
+	//スコア画面ロード
+	scoreFreamImg = loadImage("スコア枠.png");
+
+	//CONTAINERを渡すとこ----------------------------------------------------
+	CHARACTER::setContainer(this);
+	FALL::setContainer(this);
+	FALL_MANEGER::setContainer(this);
+	IMG::setContainer(this);
+	TITLE_MANEGER::setContainer(this);
+}
+
+
+
 int CONTAINER::LoadData(const char* filename) {
 	FILE* fp = 0;
 	fopen_s(&fp, filename, "r");
@@ -112,7 +167,7 @@ int CONTAINER::saveData(const char* filename, int score) {
 	fprintf(fp, "%d\n", NumData);
 	char rank[256];
 	for (int i = 0; i < NumData; i++) {
-		sprintf_s(rank, "%s%d", "No.", i+1);
+		sprintf_s(rank, "No.%d", i+1);
 		fprintf(fp, "%s %d\n", rank, (int)Rank[i].value());
 	}
 	fclose(fp);

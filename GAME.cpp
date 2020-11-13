@@ -3,8 +3,8 @@
 #include<time.h>
 #include"graphic.h"
 #include"debugStr.h"
-
 #include"window.h"
+
 #include"GAME.h"
 #include"CONTAINER.h"
 #include"CHARACTER.h"
@@ -13,8 +13,9 @@
 #include"FALL_APPLE.h"
 #include"CHECK.h"
 #include"IMG.h"
-
 #include"TITLE_MANEGER.h"
+#include"SCORE_IMG.h"
+
 
 #include"FADE.h"
 #include"SCORE.h"
@@ -36,20 +37,8 @@ GAME::GAME() {
 	 TitelManeger = new TITLE_MANEGER;
 	 Score = new SCORE;
 	 TimeLimit = new TIME_LIMIT;
-
-	
-	 C->LoadData("data/init.txt");
-
-	 TimeCnt = C->getIData("TimeCnt");
-	 FallFruitCnt = C->getIData("fallCnt");
-	 FallItemCnt = C->getIData("fallCnt");
-
-
-	 PlayerScore = 5000;
-
-
+	 ScoreImg = new SCORE_IMG;
 	 Bgm = loadSound("タイトルBGM.wav");
-	 scoreImage = loadImage("sukoa.png");
 	 playLoopSound(Bgm);
 
 
@@ -64,6 +53,7 @@ GAME::~GAME() {
 	delete TitelManeger;
 	delete Score;
 	delete TimeLimit;
+	delete ScoreImg;
 }
 
 void GAME::main() {
@@ -93,7 +83,7 @@ void GAME::main() {
 				Bgm = loadSound("ゲームプレイBGM.wav");
 				playLoopSound(Bgm);
 
-				flag = 0;
+				gameInit();
 
 				GameStart = GAME_START_PLAY;
 
@@ -164,29 +154,37 @@ void GAME::main() {
 
 
 
-			FallManeger->update();
-			Player->update();
 
 			Id = FallManeger->collision(Player->top(), Player->bottom(), Player->left(), Player->right());
 
-			if ('a' <= Id && Id <= 'f') { PlayerScore += FallManeger->getScore(Id); }
-			if (Id == 'g') { TimeCnt += 600; }
+			if ('a' <= Id && Id <= 'f') {
+				PlayerScore += FallManeger->getScore(Id); 
+			}
+			if (Id == 'g') { 
+				TimeCnt += 600; 
+			}
 			if (Id == 'h') { TimeCnt -= 600; }
 			if (Id == 'i') { Player->speedUp(); }
 			if (Id == 'j') { if (Player->adsSpeed() > 5.5f) { Player->speedDown(); } }
+			//Idリセット
+			Id = 0;
 
 
-
+			FallManeger->update();
+			Player->update();
 			FallManeger->draw();
 			Player->draw();
 
 
+			Score->scoredraw(PlayerScore);
 
 
 
 			if (TimeCnt <= 0) {
-				TitelManeger->changeTitleImg();
-				FallManeger->deleteAlpha();
+
+				if (GameLevel == GAME_LEVEL_EASY) { C->LoadData("data/score.easy.txt"); }
+				if (GameLevel == GAME_LEVEL_NORMAL) { C->LoadData("data/score.normal.txt"); }
+				if (GameLevel == GAME_LEVEL_HARD) { C->LoadData("data/score.hard.txt"); }
 				GameStart = GAME_START_SCORE;
 			}
 
@@ -200,12 +198,6 @@ void GAME::main() {
 
 
 		}
-
-
-		drawImage(scoreImage, 0, 0);
-		Score->scoredraw(PlayerScore);
-
-
 		break;
 
 
@@ -214,46 +206,39 @@ void GAME::main() {
 	case GAME_START_SCORE:
 
 		if (Fade->alpha() <= 0) {
-			if (flag == 0) {
-				if (GameLevel == GAME_LEVEL_EASY) { C->saveData("data/score.easy.txt", PlayerScore); }
-				if (GameLevel == GAME_LEVEL_NORMAL) { C->saveData("data/score.normal.txt", PlayerScore); }
-				if (GameLevel == GAME_LEVEL_HARD) { C->saveData("data/score.hard.txt", PlayerScore); }
-				flag++;
-			}
+			FallManeger->update();
+			FallManeger->draw();
+			Player->draw();
 
 
 			if (isTrigger(KEY_Z)) {
 				TitelManeger->changeTitleImg();
 				FallManeger->deleteAlpha();
+
+				if (GameLevel == GAME_LEVEL_EASY) { C->saveData("data/score.easy.txt", PlayerScore); }
+				if (GameLevel == GAME_LEVEL_NORMAL) { C->saveData("data/score.normal.txt", PlayerScore); }
+				if (GameLevel == GAME_LEVEL_HARD) { C->saveData("data/score.hard.txt", PlayerScore); }
+
 				GameStart = GAME_START_TITEL;
 				GameTitel = GAME_PLAY;
 			}
+
+			ScoreImg->draw();
+			//ランキングを稼働させる
+			ScoreImg->drawRankScore(PlayerScore);
+
+			
 		}
 		else {
 			Fade->fadeIn();
 		}
 
 		break;
-
-
 	}
 
 
-
 	FallManeger->draw();
-	setDebugStr("TimeCnt=%d", GameTitel);
-	setDebugStr("TimeCnt=%d", GameStart);
-
-
-	drawDebugStr();
-
-
 	Fade->draw();
-
-
-
-
-
 	present();
 
 }
@@ -264,4 +249,15 @@ bool GAME::end() {
 	}
 	return false;
 
+}
+
+void GAME::gameInit() {
+
+	C->LoadData("data/init.txt");
+
+	TimeCnt = C->getIData("TimeCnt");
+	FallFruitCnt = C->getIData("fallCnt");
+	FallItemCnt = C->getIData("fallCnt");
+
+	PlayerScore = 0;
 }

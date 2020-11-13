@@ -78,11 +78,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)\</OutDir>
+    <OutDir>$(SolutionDir)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)\</OutDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -136,6 +136,9 @@
       <AdditionalDependencies>framework.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>../framework/release</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(Configuration)\$(ProjectName).exe</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -157,6 +160,9 @@
       <AdditionalDependencies>framework.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>../framework/x64/release</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(Platform)\$(Configuration)\$(ProjectName).exe</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CHARACTER.cpp" />
@@ -181,6 +187,7 @@
     <ClCompile Include="PLAYER.cpp" />
     <ClCompile Include="IMG.cpp" />
     <ClCompile Include="SCORE.cpp" />
+    <ClCompile Include="SCORE_IMG.cpp" />
     <ClCompile Include="SELECT.cpp" />
     <ClCompile Include="SOUND_MANEGER.cpp" />
     <ClCompile Include="TIME_LIMIT.cpp" />
@@ -213,6 +220,7 @@
     <ClInclude Include="FALL_UP_SHOES.h" />
     <ClInclude Include="GAME.h" />
     <ClInclude Include="SCORE.h" />
+    <ClInclude Include="SCORE_IMG.h" />
     <ClInclude Include="SELECT.h" />
     <ClInclude Include="PLAYER.h" />
     <ClInclude Include="HowToPlay.h" />

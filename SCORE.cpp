@@ -2,13 +2,11 @@
 #include"CONTAINER.h"
 #include"SCORE.h"
 
-#include"graphic.h"
-#include"debugStr.h"
 
 SCORE::SCORE() {
-	Img = C->appleImg;
-	for (int i = 0; i < 10; i++) {
-		ScoreImg[i] = C->scoreImg[i];
+	Img = C->scoreImg;
+	for (int i = 0; i < C->NumOfNum; i++) {
+		ScoreNumImg[i] = C->scoreNumImg[i];
 	}
 	Px = C->scorePx;
 	Py = C->scorePy;
@@ -16,6 +14,7 @@ SCORE::SCORE() {
 
 void SCORE::scoredraw(int score) {
 
+	drawImage(Img, 0, 0);
 
 	int place = 10000;
 	int num = 0;
@@ -30,9 +29,8 @@ void SCORE::scoredraw(int score) {
 			place /= 10;
 			continue;
 		}
-		drawImage(ScoreImg[num], Px + 75 * i, Py);
+		drawImage(ScoreNumImg[num], Px + 75 * i, Py);
 		place /= 10;
-		setDebugStr("SCORE=%d",num);
 
 	}
 }
