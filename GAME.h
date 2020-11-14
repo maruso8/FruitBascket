@@ -31,8 +31,12 @@ private:
 	int FallLotFruitCnt = 0;
 
 	int PlayerScore = 0;
+	int TimeUpCnt = 0;
+
 
 	char Id = 'a';
+
+
 
 	int GameCheck = 0;
 	int TimeCnt = 0;

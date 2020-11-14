@@ -143,8 +143,19 @@ void GAME::main() {
 			if (FallItemCnt == 0) {
 
 				Id = check->itemIdCheck(rand() % 4);
-				FallManeger->appear(Id);
 
+
+				if (TimeUpCnt >= 5) {
+					while (Id == 'g') {
+						Id = check->itemIdCheck(rand() % 4);
+					}
+				}
+
+				if (Id == 'g') {
+					TimeUpCnt++;
+				}
+
+				FallManeger->appear(Id);
 				FallItemCnt = rand() % 60 + 120;
 			}
 			else { FallItemCnt--; }
@@ -157,23 +168,18 @@ void GAME::main() {
 
 			Id = FallManeger->collision(Player->top(), Player->bottom(), Player->left(), Player->right());
 
-			if ('a' <= Id && Id <= 'f') {
-				PlayerScore += FallManeger->getScore(Id); 
-			}
-			if (Id == 'g') { 
-				TimeCnt += 600; 
-			}
-			if (Id == 'h') { TimeCnt -= 600; }
+			if ('a' <= Id && Id <= 'f') {PlayerScore += FallManeger->getScore(Id); }
+			if (Id == 'g') { TimeCnt += 180; }
+			if (Id == 'h') { TimeCnt -= 180; }
 			if (Id == 'i') { Player->speedUp(); }
 			if (Id == 'j') { if (Player->adsSpeed() > 5.5f) { Player->speedDown(); } }
 			//IdƒŠƒZƒbƒg
 			Id = 0;
 
-
-			FallManeger->update();
 			Player->update();
-			FallManeger->draw();
+			FallManeger->update();
 			Player->draw();
+			FallManeger->draw();
 
 
 			Score->scoredraw(PlayerScore);
@@ -237,7 +243,6 @@ void GAME::main() {
 	}
 
 
-	FallManeger->draw();
 	Fade->draw();
 	present();
 
