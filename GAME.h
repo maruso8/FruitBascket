@@ -34,7 +34,7 @@ private:
 	int TimeUpCnt = 0;
 
 
-	char Id = 'a';
+	char Id = 0;
 
 
 

@@ -52,7 +52,12 @@ CONTAINER::CONTAINER() {
 	shoesDownImg = loadImage("k_down.png");
 
 	//スコア画面ロード
-	scoreFreamImg = loadImage("スコア枠.png");
+	scoreFreamImg = loadImage("ランキング枠.png");
+	char name[256] = { 0 };
+	for (int i = 0; i < 3; i++) {
+		sprintf_s(name, "%d位.png", i+1);
+		rankNumImg[i] = loadImage(name);
+	}
 
 	//CONTAINERを渡すとこ----------------------------------------------------
 	CHARACTER::setContainer(this);

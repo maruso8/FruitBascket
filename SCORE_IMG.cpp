@@ -8,7 +8,9 @@ SCORE_IMG::SCORE_IMG() {
 	FreamPx = C->freamPx;
 	FreamPy = C->freamPy;
 
-	RankImg = C->scoreImg;
+	for (int i = 0; i < 3; i++) {
+		RankImg[i] = C->rankNumImg[i];
+	}
 	RankPx = C->rankPx;
 	RankPy = C->rankPy;
 	RankNum = C->rankNum;
@@ -45,9 +47,9 @@ void SCORE_IMG::drawRankScore(int score) {
 		sprintf_s(name, "No.%d", i + 1);
 		Rank[i] = C->getIData(name);
 	}
-
+	//1ˆÊ2ˆÊ3ˆÊ‚Ì‰æ‘œ
 	for (int i = 0; i < RankNum; i++) {
-		drawImage(RankImg, ScorePx, ScorePy + (i * ScoreSpace));
+		drawImage(RankImg[i], ScorePx, ScorePy + (i * ScoreSpace));
 	}
 
 

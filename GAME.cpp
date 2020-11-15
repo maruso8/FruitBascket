@@ -150,11 +150,6 @@ void GAME::main() {
 						Id = check->itemIdCheck(rand() % 4);
 					}
 				}
-
-				if (Id == 'g') {
-					TimeUpCnt++;
-				}
-
 				FallManeger->appear(Id);
 				FallItemCnt = rand() % 60 + 120;
 			}
@@ -169,7 +164,7 @@ void GAME::main() {
 			Id = FallManeger->collision(Player->top(), Player->bottom(), Player->left(), Player->right());
 
 			if ('a' <= Id && Id <= 'f') {PlayerScore += FallManeger->getScore(Id); }
-			if (Id == 'g') { TimeCnt += 180; }
+			if (Id == 'g') { TimeCnt += 180; TimeUpCnt++; }
 			if (Id == 'h') { TimeCnt -= 180; }
 			if (Id == 'i') { Player->speedUp(); }
 			if (Id == 'j') { if (Player->adsSpeed() > 5.5f) { Player->speedDown(); } }

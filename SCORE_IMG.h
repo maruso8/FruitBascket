@@ -10,7 +10,7 @@ public:
 	void draw();
 private:
 	int ScoreNumImg[10] = { 0 };
-	int RankImg = 0;
+	int RankImg[3] = { 0 };
 	int RankNum = 0;
 	int Rank[3] = { 0 };
 	float RankPx = 0;

@@ -205,15 +205,16 @@ public:
 	//スコア関連-------------------------------------------------------
 	//SCORE
 	int scoreFreamImg = 0;
+	int rankNumImg[3] = { 0 };
 	const int rankNum = 3;
 	const float rankPx = 900.0f;
-	const float rankPy = 150.0f;
+	const float rankPy = 200.0f;
 	const float rankWidth = 75.0f;
 	const float scoreImgPx = 600.0f;
-	const float scoreImgPy = 150.0f;
+	const float scoreImgPy = 200.0f;
 	const float scoreSpace = 200.0f;
 	const float PlayerScorePx = 700.0f;
-	const float PlayerScorePy = 800.0f;
+	const float PlayerScorePy = 850.0f;
 
 
 
