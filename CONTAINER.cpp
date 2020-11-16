@@ -55,7 +55,7 @@ CONTAINER::CONTAINER() {
 	scoreFreamImg = loadImage("ƒ‰ƒ“ƒLƒ“ƒO˜g.png");
 	char name[256] = { 0 };
 	for (int i = 0; i < 3; i++) {
-		sprintf_s(name, "%dˆÊ.png", i+1);
+		sprintf_s(name, "%dˆÊ˜g.png", i+1);
 		rankNumImg[i] = loadImage(name);
 	}
 
