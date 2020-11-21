@@ -29,36 +29,6 @@
     <ClCompile Include="FADE.cpp">
       <Filter>FADE</Filter>
     </ClCompile>
-    <ClCompile Include="FALL_APPLE.cpp">
-      <Filter>GAME_IMG\FALL\FALL_FRUIT</Filter>
-    </ClCompile>
-    <ClCompile Include="FALL_BANANA.cpp">
-      <Filter>GAME_IMG\FALL\FALL_FRUIT</Filter>
-    </ClCompile>
-    <ClCompile Include="FALL_ORANGE.cpp">
-      <Filter>GAME_IMG\FALL\FALL_FRUIT</Filter>
-    </ClCompile>
-    <ClCompile Include="FALL_STRAWBERRY.cpp">
-      <Filter>GAME_IMG\FALL\FALL_FRUIT</Filter>
-    </ClCompile>
-    <ClCompile Include="FALL_ROT_APPLE.cpp">
-      <Filter>GAME_IMG\FALL\FALL_FRUIT</Filter>
-    </ClCompile>
-    <ClCompile Include="FALL_ROT_ORANGE.cpp">
-      <Filter>GAME_IMG\FALL\FALL_FRUIT</Filter>
-    </ClCompile>
-    <ClCompile Include="FALL_UP_CLOCK.cpp">
-      <Filter>GAME_IMG\FALL\FALL_ITEM</Filter>
-    </ClCompile>
-    <ClCompile Include="FALL_DOWN_CLOCK.cpp">
-      <Filter>GAME_IMG\FALL\FALL_ITEM</Filter>
-    </ClCompile>
-    <ClCompile Include="FALL_UP_SHOES.cpp">
-      <Filter>GAME_IMG\FALL\FALL_ITEM</Filter>
-    </ClCompile>
-    <ClCompile Include="FALL_DOWN_SHOES.cpp">
-      <Filter>GAME_IMG\FALL\FALL_ITEM</Filter>
-    </ClCompile>
     <ClCompile Include="SCORE.cpp">
       <Filter>GAME_IMG\SCORE</Filter>
     </ClCompile>
@@ -79,6 +49,15 @@
     </ClCompile>
     <ClCompile Include="SCORE_IMG.cpp">
       <Filter>SCORE_IMG</Filter>
+    </ClCompile>
+    <ClCompile Include="IMG_DATA.cpp">
+      <Filter>ALL_DATA</Filter>
+    </ClCompile>
+    <ClCompile Include="ID_DATA.cpp">
+      <Filter>ALL_DATA</Filter>
+    </ClCompile>
+    <ClCompile Include="PROCESS.cpp">
+      <Filter>GAME</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +151,15 @@
     </ClInclude>
     <ClInclude Include="SCORE_IMG.h">
       <Filter>SCORE_IMG</Filter>
+    </ClInclude>
+    <ClInclude Include="IMG_DATA.h">
+      <Filter>ALL_DATA</Filter>
+    </ClInclude>
+    <ClInclude Include="ID_DATA.h">
+      <Filter>ALL_DATA</Filter>
+    </ClInclude>
+    <ClInclude Include="PROCESS.h">
+      <Filter>GAME</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

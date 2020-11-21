@@ -2,10 +2,20 @@
 #include"CONTAINER.h"
 #include<stdlib.h>
 
-#include"graphic.h"
-#include"debugStr.h"
+
 CONTAINER* FALL::C = 0;
-void setRandSeed();
+
+
+FALL::FALL(char* name) {
+	setImg(name);
+	setId(name);
+	setAdsSpeed(name);
+	setRadius();
+	setAlpha(name);
+	setScore(name);
+}
+
+
 
 void FALL::appear(){//1770,1180,365
 	Px = rand() % 1380 + 265;
@@ -18,7 +28,7 @@ void FALL::update() {
 	if (C->windowHeight < Py) {
 		Alpha = 0;
 	}
-
+	int a = 0;
 }
 
 void FALL::draw() {
@@ -31,9 +41,36 @@ float FALL::top() { return Py - Radius+20; }
 float FALL::bottom(){ return Py + Radius; }
 float FALL::left(){ return Px - Radius; }
 float FALL::right(){ return Px + Radius; }
-
-
 int FALL::score() { return Score; };
 char FALL::id() { return Id; }
 float FALL::alpha() { return Alpha; }
+
+
+void FALL::setImg(const char* name){
+	sprintf_s(Name, "%sImg.png", name);
+	Img = C->getIData(Name);
+}
+void FALL::setId(const char* name){
+	sprintf_s(Name, "%sId",name);
+	Id = C->getCData(Name);
+}
+void FALL::setAdsSpeed(const char* name){
+	sprintf_s(Name, "%sAdsSpeed", name);
+	AdsSpeed = C->getFData(Name);
+}
+void FALL::setRadius(){
+	sprintf_s(Name, "fallRadius");
+	Radius = C->getFData(Name);
+}
+void FALL::setAlpha(const char* name){
+	sprintf_s(Name, "%sAlpha", name);
+	Alpha = C->getFData(Name);
+}
+void FALL::setScore(const char* name){
+	sprintf_s(Name, "%sScore", name);
+	Score = C->getIData(Name);
+}
+
+
+
 

@@ -1,3 +1,0 @@
-2
-TimeCnt 3600
-fallCnt 10

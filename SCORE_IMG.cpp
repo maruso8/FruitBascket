@@ -39,14 +39,10 @@ void SCORE_IMG::drawRankScore(int score) {
 
 	//ランキング処理開始----------------------------------------------------------------
 
-
-	//ランキング上位3人のスコアを読み込む
-
-	char name[256];
-	for (int i = 0; i < RankNum; i++) {
-		sprintf_s(name, "No.%d", i + 1);
-		Rank[i] = C->getIData(name);
+	for (int i = 0; i < 3; i++) {
+		RankScore[i] = C->rank[i].RankScore;
 	}
+	
 	//1位2位3位の画像
 	for (int i = 0; i < RankNum; i++) {
 		drawImage(RankImg[i], ScorePx, ScorePy + (i * ScoreSpace));
@@ -54,7 +50,6 @@ void SCORE_IMG::drawRankScore(int score) {
 
 
 	//プレイヤースコアの保存
-	int tmp = score;
 
 	//自分のスコア表示
 	place = 10000;
@@ -72,18 +67,6 @@ void SCORE_IMG::drawRankScore(int score) {
 		drawImage(ScoreNumImg[num], PlayerScorePx + RankWidth * j, PlayerScorePy);
 		place /= 10;
 	}
-	//プレイヤースコアの読み込み
-	score = tmp;
-
-	//スコアの比較
-	for (int i = 0; i < RankNum; i++) {
-		if (score > Rank[i]) {
-			int work = Rank[i];
-			Rank[i] = score;
-			score = work;
-		}
-	}
-
 
 	//ランキングのスコア表示
 
@@ -92,11 +75,11 @@ void SCORE_IMG::drawRankScore(int score) {
 		num = 0;
 
 		for (int j = 0; j < 5; j++) {
-			if (Rank[i] < 0) {
-				Rank[i] = 0;
+			if (RankScore[i] < 0) {
+				RankScore[i] = 0;
 			}
-			num = Rank[i] / place;
-			Rank[i] %= place;
+			num = RankScore[i] / place;
+			RankScore[i] %= place;
 			if (num == 0 && place > 1000) {
 				place /= 10;
 				continue;

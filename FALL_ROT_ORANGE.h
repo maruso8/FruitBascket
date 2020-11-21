@@ -1,13 +1,7 @@
 #pragma once
-
-class FALL;
+#include"FALL.h"
 
 class ROT_ORANGE:public FALL {
 public:
-	ROT_ORANGE();
-	void draw();
-
-private:
-
-
+	using FALL::FALL;
 };

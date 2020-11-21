@@ -3,18 +3,17 @@
 
 //データの一つを読み込むのに必要なクラス
 
-class DATA {
-	//データ値　記載されている数字を返すための変数
-	float Value = 0;
+class ID_DATA {
 	//データの名前 std::stringはなんか便利なcharとでも思っておこう
 	std::string Name;
-
+	//Idの名前　furuitのために追加
+	char Id = 0;
 public:
 	//セッター
-	void setValue(float value);
 	void setName(const char* name);
+	void setId(const char id);
 	//ゲッター
-	float value();
 	std::string name();
+	char id();
 
 };

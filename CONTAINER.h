@@ -2,7 +2,6 @@
 #include<stdio.h>
 #include"graphic.h"
 #include"framework.h"
-#include"graphic.h"
 #include"CHARACTER.h"
 #include"FALL.h"
 #include"FALL_MANEGER.h"
@@ -17,10 +16,16 @@
 //DATAの値を入れるところ。
 
 class CONTAINER {
-
+	
 	class DATA* Data = 0;
-	class DATA* Rank = 0;
-	int NumData = 0;
+	class ID_DATA*IdData = 0;
+	class IMG_DATA* ImgData = 0;
+
+	int DataNum[3] = { 0 };
+
+	int TotalRankNum = 3;
+	
+
 
 public:
 	CONTAINER();
@@ -31,14 +36,27 @@ public:
 	int getIData(const char* name);
 	//データをfloat値で取得
 	float getFData(const char* name);
+	//データをchar値で取得
+	char getCData(const char* name);
 	//ファイルにデータを書き込む
 	int saveData(const char* filename, int score);
+	//ランクを消して容量確保
+	void DeleteRank();
+
+	int bgm = 0;
+	//CONTAINER内外で使うデータ-------------------------------------------------
+	class RANK {
+	public:
+		char Rank[5] = {};
+		int RankScore = 0;
+	};
 
 
+	RANK* rank = 0;
 
 	//ここからCONTAINER外のデータ------------------------------------------------
-	//SYSTEM
 
+	//SYSTEM 
 	const int windowWidht = 1920;//1920
 	const int windowHeight = 1080;//1080
 	const int fallCnt = 100;
@@ -47,15 +65,13 @@ public:
 	float fadePy = 0.0f;
 	COLOR fadeColor = COLOR(1, 1, 1, 0);
 	float fadeDecayAlpha = 1.0f / 50.0f;
-
 	//タイトル関連----------------------------------------------------------------
-	//BACK_GROUND
+	//BACK_GROUND 
 	int backGroundImg = 0;
 	int gameBackGroundImg = 0;
 	const float backGroundPx = 0.0f;
 	const float backGroundPy = 0.0f;
 	const int backGroundNum = 1;
-
 
 	//TITLE
 	int titleImg = 0;
@@ -63,7 +79,7 @@ public:
 	const float titlePy = 0.0f;
 	const int titleNum = 1;
 
-	//SELECT
+	//SELECT 
 	int selectImg[4] = { 0,0,0,0 };
 	int selectFleamImg = 0;
 	char selectName[256];
@@ -74,30 +90,29 @@ public:
 	const COLOR selectColor = COLOR(1.0f, 1.0f, 1.0f, 0.5f);
 	const int selectNum = 4;
 
-	//FREAM
+	// FREAM 
 	int freamImg = 0;
-	const float freamPx=500.0f;
-	const float freamPy=50.0f;
+	const float freamPx = 500.0f;
+	const float freamPy = 50.0f;
 	const int freamNum = 1;
 
-	//HowToPlay
+	//HowToPlay 
 	int howToPlayImg = 0;
 	const float howToPlayPx = 500.0f;
 	const float howToPlayPy = 50.0f;
 	const int howToPlayNum = 1;
 
-	//CREDIT
+	//CREDIT 
 	int creditImg = 0;
 	const float creditPx = 500.0f;
 	const float creditPy = 500.0f;
 	const int creditNum = 1;
 
-	//SIGNAL
+	//SIGNAL 
 	int signalImg = 0;
 	const float signalPx = 650.0f;
 	const float signalPy = 425.0f;
 	const int signalNum = 1;
-
 
 	//ゲームプレイ関連---------------------------------------------------
 	//GAME_PLAY
@@ -122,85 +137,8 @@ public:
 
 	const float playerHitTop = 0.0f;//15
 	const float playerHitBottom = 10.0f;//27
-	const float playerHitLeft =  50.0f;//78
+	const float playerHitLeft = 50.0f;//78
 	const float playerHitRight = 50.0f;//74
-
-	//FALL_APPLE
-	int appleImg = 0;
-	const char appleId= 'a';
-	const int NumApple = 7;
-	const float appleAdsSpeed = 3.0f;
-	const float appleAlpha =  0.0f;
-	const int appleScore = 50;
-
-	//FALL_STRAWBERRY
-	int strawberryImg = 0;
-	const char strawberryId = 'b';
-	const int NumStrawberry = 7;
-	const float strawberryAdsSpeed = 4.0f;
-	const float strawberryAlpha = 0.0f;
-	const int strawberryScore = 100;
-
-	//FALL_ORANGE
-	int orangeImg = 0;
-	const char orangeId = 'c';
-	const int NumOrange = 7;
-	const float orangeAdsSpeed = 5.0f;
-	const float orangeAlpha = 0.0f;
-	const int orangeScore = 200;
-
-	//FALL_BANANA
-	int bananaImg = 0;
-	const char bananaId = 'd';
-	const int NumBanana = 7;
-	const float bananaAdsSpeed = 6.0f;
-	const float bananaAlpha = 0.0f;
-	const int bananaScore = 300;
-
-	//FALL_ROT_APPLE
-	int rotAppleImg = 0;
-	const char rotAppleId = 'e';
-	const int NumRotApple = 7;
-	const float rotAppleAdsSpeed = 5.0f;
-	const float rotAppleAlpha = 0.0f;
-	const int rotAppleScore = -100;
-
-	//FALL_ROT_ORANGE
-	int rotOrangeImg = 0;
-	const char rotOrangeId = 'f';
-	const int NumRotOrange = 7;
-	const float rotOrangeAdsSpeed = 5.0f;
-	const float rotOrangeAlpha = 0.0f;
-	const int rotOrangeScore = -200;
-
-	//FALL_UP_CLOCK
-	int clockUpImg = 0;
-	const char clockUpId = 'g';
-	const int NumClockUp = 5;
-	const float clockUpAdsSpeed = 5.0f;
-	const float clockUpAlpha = 0.0f;
-
-	//FALL_DOWN_CLOCK
-	int clockDownImg = 0;
-	const char clockDownId = 'h';
-	const int NumClockDown = 5;
-	const float clockDownAdsSpeed = 5.0f;
-	const float clockDownAlpha = 0.0f;
-
-	//FALL_UP_SHOES
-	int shoesUpImg = 0;
-	const char shoesUpId = 'i';
-	const int NumShoesUp = 5;
-	const float shoesUpAdsSpeed = 5.0f;
-	const float shoesUpAlpha = 0.0f;
-
-	//FALL_DOWN_SHOES
-	int shoesDownImg = 0;
-	const char shoesDownId = 'j';
-	const int NumShoesDown = 5;
-	const float shoesDownAdsSpeed = 5.0f;
-	const float shoesDownAlpha = 0.0f;
-
 
 	//スコア関連-------------------------------------------------------
 	//SCORE
@@ -213,7 +151,7 @@ public:
 	const float scoreImgPx = 600.0f;
 	const float scoreImgPy = 200.0f;
 	const float scoreSpace = 200.0f;
-	const float PlayerScorePx = 700.0f;
+	const float PlayerScorePx = 750.0f;
 	const float PlayerScorePy = 850.0f;
 
 

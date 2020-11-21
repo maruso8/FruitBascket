@@ -5,10 +5,12 @@ class CHARACTER;
 class FALL_MANEGER;
 class CHECK;
 class IMG;
+class FADE;
 class TITLE_MANEGER;
 class SCORE;
 class TIME_LIMIT;
 class SCORE_IMG;
+class PROCESS;
 
 class GAME {
 public:
@@ -20,11 +22,9 @@ public:
 
 private:
 
-	int flag = 0;
-
-
-
 	int Bgm = 0;
+
+
 
 	int FallFruitCnt = 0;
 	int FallItemCnt = 0;
@@ -53,11 +53,13 @@ private:
 	SCORE* Score = 0;
 	TIME_LIMIT* TimeLimit = 0;
 	SCORE_IMG* ScoreImg = 0;
+	PROCESS* Process = 0;
+
 
 
 	enum GAME_START {GAME_START_TITEL,GAME_START_PLAY,GAME_START_SCORE};
 	enum GAME_TITEL {GAME_PLAY, GAME_WAIT,GAME_HowToPlay, GAME_CREDIT, GAME_END };
-	enum GAME_LEVEL{GAME_LEVEL_EASY, GAME_LEVEL_NORMAL, GAME_LEVEL_HARD};
+	enum GAME_LEVEL { GAME_LEVEL_EASY = 0, GAME_LEVEL_NORMAL = 1, GAME_LEVEL_HARD = 2 };
 
 
 	GAME_START GameStart = GAME_START_TITEL;//GAME_START_TITEL;

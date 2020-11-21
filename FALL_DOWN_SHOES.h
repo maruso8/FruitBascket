@@ -1,13 +1,7 @@
 #pragma once
-
-class FALL;
+#include"FALL.h"
 
 class SHOES_DOWN:public FALL {
 public:
-	SHOES_DOWN();
-	void draw();
-
-private:
-
-
+	using FALL::FALL;
 };

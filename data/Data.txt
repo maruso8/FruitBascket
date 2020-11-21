@@ -1,0 +1,75 @@
+10
+10
+39
+
+appleImg.png 0
+bananaImg.png 0
+orangeImg.png 0
+strawberryImg.png 0
+rotAppleImg.png 0
+rotOrangeImg.png 0
+clockUpImg.png 0
+clockDownImg.png 0
+shoesUpImg.png 0
+shoesDownImg.png 0
+
+appleId a
+strawberryId b
+orangeId c
+bananaId d
+rotAppleId e
+rotOrangeId f
+clockUpId g
+clockDownId h
+shoesUpId i
+shoesDownId j
+
+TimeCnt 3600
+fallCnt 10
+fallRadius 50
+
+Numapple 7
+appleAdsSpeed  3
+appleAlpha 0
+appleScore 50
+
+NumStrawberry 7
+strawberryAdsSpeed 4
+strawberryAlpha 0
+strawberryScore 100
+
+NumOrange 7
+orangeAdsSpeed 5
+orangeAlpha 0
+orangeScore 200
+
+NumBanana 7
+bananaAdsSpeed 6
+bananaAlpha 0
+bananaScore 300
+
+NumRotApple 7
+rotAppleAdsSpeed 5
+rotAppleAlpha 0
+rotAppleScore -100
+
+NumRotOrange 7
+rotOrangeAdsSpeed 5
+rotOrangeAlpha 0
+rotOrangeScore -200
+
+NumClockUp 5
+clockUpAdsSpeed 5
+clockUpAlpha 0
+
+NumClockDown 5
+clockDownAdsSpeed 5
+clockDownAlpha 0
+
+NumShoesUp 5
+shoesUpAdsSpeed 5
+shoesUpAlpha 0
+
+NumShoesDown 5
+shoesDownAdsSpeed 5
+shoesDownAlpha 0

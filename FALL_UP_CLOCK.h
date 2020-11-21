@@ -1,13 +1,7 @@
 #pragma once
-
-class FALL;
+#include"FALL.h"
 
 class CLOCK_UP:public FALL {
 public:
-	CLOCK_UP();
-	void draw();
-
-private:
-
-
+	using FALL::FALL;
 };

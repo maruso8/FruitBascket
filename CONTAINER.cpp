@@ -1,11 +1,15 @@
 #include<cassert>
 #include<stdio.h>
-#include"DATA.h"
-#include"CONTAINER.h"
-
-
-
+#include<stdlib.h>
 #include<string>
+#include"sound.h"
+
+#include"DATA.h"
+#include"ID_DATA.h"
+#include"IMG_DATA.h"
+#include"CONTAINER.h"
+#include"PROCESS.h"
+
 
 
 
@@ -39,17 +43,9 @@ CONTAINER::CONTAINER() {
 		scoreNumImg[i] = divideImage(AllNumImg, 75 * i, 0, 75, 75);
 	}
 
-	//フルーツ画像ロード
-	appleImg = loadImage("リンゴ.png");
-	bananaImg = loadImage("バナナ.png");
-	orangeImg = loadImage("ミカン.png");
-	strawberryImg = loadImage("イチゴ.png");
-	rotAppleImg = loadImage("h_ringo.png");
-	rotOrangeImg = loadImage("h_mikan.png");
-	clockUpImg = loadImage("t_up.png");
-	clockDownImg = loadImage("t_down.png");
-	shoesUpImg = loadImage("k_up.png");
-	shoesDownImg = loadImage("k_down.png");
+	
+	bgm = loadSound("タイトルBGM.wav");
+
 
 	//スコア画面ロード
 	scoreFreamImg = loadImage("ランキング枠.png");
@@ -65,26 +61,49 @@ CONTAINER::CONTAINER() {
 	FALL_MANEGER::setContainer(this);
 	IMG::setContainer(this);
 	TITLE_MANEGER::setContainer(this);
+	PROCESS::setContainer(this);
+	
 }
 
 
 
 int CONTAINER::LoadData(const char* filename) {
 	FILE* fp = 0;
-	fopen_s(&fp, filename, "r");
+	fopen_s(&fp,filename, "r");
 
 	//fpが存在しないときは偽を返してここで停止して注意が出る。#include<cassert>で使えるようになる。
 	assert(fp != 0);
-	//detaファイルの一行目はdata数でなければいけない
-	fscanf_s(fp, "%d", &NumData);
+	//Dataファイルの最初はImg、Id、Dataの数でなければならない
+	for (int i = 0; i < 3; i++) {
+		fscanf_s(fp, "%d", &DataNum[i]);
+	}
+	//scanしたNumData分のDetaをそれぞれ確保
+	ImgData = new IMG_DATA[DataNum[0]];
+	IdData = new ID_DATA[DataNum[1]];
+	Data = new DATA[DataNum[2]];
+	
 
-	//scanしたNumData分のDetaを確保
-	Data = new DATA[NumData];
 
-	//読み込み開始
+	//読み込み開始-----------------------------------------------------------------------------------------------
+	//画像の読み込み
 	char name[256];
+	int Img = 0;
+	for (int i = 0; i < DataNum[0]; i++) {
+		fscanf_s(fp, "%s %d", name, 256, &Img);
+		ImgData[i].setName(name);
+		ImgData[i].setImg(name);
+	}
+
+	//Idの読み込み
+	char Id;
+	for (int i = 0; i < DataNum[1]; i++) {
+		fscanf_s(fp, "%s %c", name, 256, &Id);
+		IdData[i].setName(name);
+		IdData[i].setId(Id);
+	}
+
 	float value;
-	for (int i = 0; i < NumData; i++) {
+	for (int i = 0; i < DataNum[2]; i++) {
 		//全てfloat値で読み込む。文字列をもらう場合は文字列の最大数を指定する。超えたら受け取らない(スキップする)
 		//fscan_fは対象の使用回数＝段落となっている。つまりscanfすると一列全てscanfする。
 		fscanf_s(fp, "%s %f", name, 256, &value);
@@ -103,82 +122,115 @@ CONTAINER::~CONTAINER() {
 		delete[] Data;
 		Data = 0;
 	}
-}
+	if (IdData) {
+		//new data*[num]のようにnewを*(ポインタ)で作ってないのでdelete[]でOK。 
+		delete[] IdData;
+		IdData = 0;
+	}
+	if (ImgData) {
+		//new data*[num]のようにnewを*(ポインタ)で作ってないのでdelete[]でOK。 
+		delete[] ImgData;
+		ImgData = 0;
+	}
+	if (rank) {
+		//new data*[num]のようにnewを*(ポインタ)で作ってないのでdelete[]でOK。 
+		delete[] rank;
+		rank = 0;
+	}
 
+
+}
 
 int CONTAINER::getIData(const char* name) {
 	int i = 0;
-	for (i = 0; i < NumData; i++) {
+	for (i = 0; i < DataNum[0]; i++) {
+		if (ImgData[i].name() == name) {
+			return (int)ImgData[i].img();
+		}
+	}
+	for (i = 0; i < DataNum[2]; i++) {
 		if (Data[i].name() == name) {
 			return (int)Data[i].value();
 		}
 	}
-	assert(i < NumData);
+	assert(i < DataNum[2]);
 	return 0;
 }
 
 
 float CONTAINER::getFData(const char* name) {
 	int i = 0;
-	for (i = 0; i < NumData; i++) {
+	for (i = 0; i < DataNum[2]; i++) {
 		if (Data[i].name() == name) {
 			return Data[i].value();
 		}
 	}
-	assert(i < NumData);
+	assert(i < DataNum[2]);
 	return 0;
 }
 
+char CONTAINER::getCData(const char* name) {
+	int i = 0;
+	for (i = 0; i < DataNum[1]; i++) {
+		if (IdData[i].name() == name) {
+			return IdData[i].id();
+		}
+	}
+	assert(i < DataNum[1]);
+	return 0;
+}
 
 int CONTAINER::saveData(const char* filename, int score) {
 
-	FILE* fp = 0;
-	//データがいくつあるか求める。
-	fopen_s(&fp, filename, "r");
+	FILE* fp;
+	rank = new RANK[TotalRankNum];
+
+
+
+	fopen_s(&fp, filename, "rb");
 	//fpが存在しないときは偽を返してここで停止して注意が出る。#include<cassert>で使えるようになる。
-	assert(fp != 0);
-	//detaファイルの一行目はdata数でなければいけない
-	fscanf_s(fp, "%d", &NumData);
-	//scanしたNumData分のDetaを確保
-	Rank = new DATA[NumData];
-	//読み込み開始
-	char name[256];
-	float value;
-	for (int i = 0; i < NumData; i++) {
-		//全てint値で読み込む
-		fscanf_s(fp, "%s %f", name, 256, &value);
-		Rank[i].setName(name);
-		Rank[i].setValue(value);
+	assert(fp != NULL);
+
+	//個々の修正をする！
+	//SEをやる
+
+	for (int i = 0; i < 3; i++) {
+		fread(&rank[i].Rank, sizeof(char), 5, fp);
+		fread(&rank[i].RankScore, sizeof(int), 1, fp);
 	}
+
 	fclose(fp);
 
 
 
 	//ここからセーブ開始
-	fopen_s(&fp, filename, "w");
-
-	assert(fp != 0);
+	fopen_s(&fp, filename, "wb");
+	assert(fp == NULL);
 
 	//比較
-	for (int i = 0; i < NumData; i++) {
-		if (score > Rank[i].value()) {
-			float work = Rank[i].value();
-			Rank[i].setValue(score);
+	for (int i = 0; i < 3; i++) {
+		if (score > rank[i].RankScore) {
+			float work = rank[i].RankScore;
+			rank[i].RankScore = score;
 			score = work;
 		}
 	}
-	//書き込み開始
 
-	fprintf(fp, "%d\n", NumData);
-	char rank[256];
-	for (int i = 0; i < NumData; i++) {
-		sprintf_s(rank, "No.%d", i+1);
-		fprintf(fp, "%s %d\n", rank, (int)Rank[i].value());
-	}
+	//書き込み開始
+	for (int i = 0; i < 3; i++) {
+		fwrite(&rank[i].Rank, sizeof(char), 5, fp);
+		fwrite(&rank[i].RankScore, sizeof(int), 1, fp);
+	};
+
 	fclose(fp);
 
-	delete[] Rank;
-	Rank = 0;
-
 	return 0;
+}
+
+void CONTAINER::DeleteRank() {
+	if (rank) {
+		//new data*[num]のようにnewを*(ポインタ)で作ってないのでdelete[]でOK。 
+		delete[] rank;
+		rank = 0;
+	}
 }

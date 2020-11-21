@@ -1,5 +1,5 @@
 #pragma once
-class IMG;
+#include"IMG.h"
 
 class FADE:public IMG {
 public:
