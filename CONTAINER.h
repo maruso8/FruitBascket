@@ -80,7 +80,8 @@ public:
 	const int titleNum = 1;
 
 	//SELECT 
-	int selectImg[4] = { 0,0,0,0 };
+	int selectImg[4] = { };
+	int selectLevelImg[3] = { };
 	int selectFleamImg = 0;
 	char selectName[256];
 	const int TotalSelect = 4;
@@ -89,6 +90,14 @@ public:
 	const float selectHeight = 175.0f;
 	const COLOR selectColor = COLOR(1.0f, 1.0f, 1.0f, 0.5f);
 	const int selectNum = 4;
+
+	const float LevelPx = 650;
+	const float LevelPy = 300;
+
+	const float LevelSelectPx = 1250;
+	const float LevelSelectPy = 325;
+	const float LevelSelectHeight = 200;
+
 
 	// FREAM 
 	int freamImg = 0;
@@ -129,6 +138,8 @@ public:
 
 	//PLAYER
 	int playerImg = 0;
+	int playerRImg = 0;
+	int playerLImg = 0;
 	const float playerPx = 500.0f;
 	const float playerPy = 930.0f;
 	const float playerAdsSpeed = 10.0f;

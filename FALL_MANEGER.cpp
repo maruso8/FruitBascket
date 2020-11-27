@@ -12,8 +12,10 @@
 #include"FALL_UP_SHOES.h"
 #include"FALL_DOWN_SHOES.h"
 #include"FALL_MANEGER.h"
-
-
+#include"FALL_TOMATO.h"
+#include"FALL_CHESTNUT.h"
+#include"FALL_DURIAN.h"
+#include"NEEDLE.h"
 
 
 CONTAINER* FALL_MANEGER::C = 0;
@@ -30,7 +32,10 @@ FALL_MANEGER::FALL_MANEGER() {
 	Total += C->getIData("NumShoesUp");
 	Total += C->getIData("NumClockDown");
 	Total += C->getIData("NumShoesDown");
-
+	Total += C->getIData("NumTomato");
+	Total += C->getIData("NumChestnut");
+	Total += C->getIData("NumDurian");
+	Total += C->getIData("NumNeedle");
 
 	AllFall = new FALL * [Total];
 	int i,j = 0;
@@ -44,7 +49,10 @@ FALL_MANEGER::FALL_MANEGER() {
 	for (i = 0; i < C->getIData("NumShoesUp"); i++) { AllFall[j++] = new SHOES_UP("shoesUp"); }
 	for (i = 0; i < C->getIData("NumClockDown"); i++) { AllFall[j++] = new CLOCK_DOWN("clockDown"); }
 	for (i = 0; i < C->getIData("NumShoesDown"); i++) { AllFall[j++] = new SHOES_DOWN("shoesDown"); }
-
+	for (i = 0; i < C->getIData("NumTomato"); i++) { AllFall[j++] = new TOMATO("tomato"); }
+	for (i = 0; i < C->getIData("NumChestnut"); i++) { AllFall[j++] = new CHESTNUT("chestnut"); }
+	for (i = 0; i < C->getIData("NumDurian"); i++) { AllFall[j++] = new DURIAN("durian"); }
+	for (i = 0; i < C->getIData("NumNeedle"); i++) { AllFall[j++] = new NEEDLE("needle"); }
 
 }
 
@@ -70,7 +78,20 @@ void FALL_MANEGER::appear(char Id) {
 void FALL_MANEGER::update() {
 	for (int i = 0; i < Total; i++) {
 		if (AllFall[i]->alpha() > 0.0f) {
-			AllFall[i]->update();
+			if (AllFall[i]->update()) {
+				//åIÇ™êjÇ…Ç»ÇÈèàóù
+				int j = 0;
+				while (j<Total){
+					if (AllFall[j]->id() == 'n') {
+						if (AllFall[j]->alpha() <= 0) {
+							AllFall[j]->appear(AllFall[i]->px(), AllFall[i]->py());
+							break;
+						}
+					}
+					j++;
+				}
+			}
+
 		}
 	}
 

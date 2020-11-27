@@ -17,19 +17,23 @@ FALL::FALL(char* name) {
 
 
 
-void FALL::appear(){//1770,1180,365
+void FALL::appear(float px, float py){//1770,1180,365
 	Px = rand() % 1380 + 265;
 	Py = 0;
 	Alpha = 1;
 };
 
-void FALL::update() {
+bool FALL::update() {
 	Py += AdsSpeed;
 	if (C->windowHeight < Py) {
 		Alpha = 0;
+		if (Id == 'l') {
+			return true;
+		}
 	}
-	int a = 0;
+	return false;
 }
+
 
 void FALL::draw() {
 	drawImage(Img, Px, Py, 0);
@@ -42,6 +46,8 @@ float FALL::bottom(){ return Py + Radius; }
 float FALL::left(){ return Px - Radius; }
 float FALL::right(){ return Px + Radius; }
 int FALL::score() { return Score; };
+float FALL::px() { return Px; }
+float FALL::py() { return Py; }
 char FALL::id() { return Id; }
 float FALL::alpha() { return Alpha; }
 

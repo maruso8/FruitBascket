@@ -12,6 +12,7 @@ public:
 	PLAYER();
 	
 	void update();
+	void stenRecovery();
 
 private:
 

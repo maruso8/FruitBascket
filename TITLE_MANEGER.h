@@ -2,6 +2,7 @@
 
 class CONTAINER;
 class IMG;
+class SOUND_MANEGER;
 
 class TITLE_MANEGER {
 public:
@@ -9,6 +10,7 @@ public:
 	~TITLE_MANEGER();
 	void backGround_Draw();
 	void title_Draw(int gameCheck);
+	void Level_Draw(int LevelCheck);
 	void changeTitleImg();
 	void changeGameImg();
 	bool howToPlay();
@@ -25,7 +27,8 @@ private:
 	IMG* HowToPlay = 0;
 	IMG* Credit = 0;
 	IMG* Signal = 0;
+	SOUND_MANEGER* SoundManeger = 0;
 
-	int Total = 0;
+	int SE = 0;
 	static CONTAINER* C;
 };

@@ -16,11 +16,9 @@
 #include"SCORE_IMG.h"
 #include"PROCESS.h"
 
-#include"FADE.h"
 #include"SCORE.h"
 #include"TIME_LIMIT.h"
-
-#include"sound.h"
+#include"SOUND_MANEGER.h"
 
 
 
@@ -30,29 +28,25 @@ GAME::GAME() {
 	srand((unsigned int)time(NULL));
 	 C = new CONTAINER;
 	 C->LoadData("data/Data.txt");
-	 Player = new PLAYER;
-	 FallManeger = new FALL_MANEGER;
 	 check = new CHECK;
-	 Fade = new FADE;
 	 TitelManeger = new TITLE_MANEGER;
 	 Score = new SCORE;
 	 TimeLimit = new TIME_LIMIT;
 	 ScoreImg = new SCORE_IMG;
-	 Process = new PROCESS;
-	 
+	 Proc = new PROCESS;
+	 SoundManeger = new SOUND_MANEGER;
+	 SoundManeger->getTitelBgm();
 }
 
 GAME::~GAME() {
 	delete C;
-	delete Player;
-	delete FallManeger;
 	delete check;
-	delete Fade;
 	delete TitelManeger;
 	delete Score;
 	delete TimeLimit;
 	delete ScoreImg;
-	delete Process;
+	delete Proc;
+	delete SoundManeger;
 }
 
 void GAME::main() {
@@ -60,148 +54,83 @@ void GAME::main() {
 	clearTarget();
 	TitelManeger->backGround_Draw();
 
+
+
 	switch (GameStart) {
 	case GAME_START_TITEL:
 		TitelManeger->title_Draw(GameCheck);
+		if (GameTitel == GAME_PROCESS) {
+			if (isTrigger(KEY_X)) {
+				GameTitel = GAME_PLAY;
+				Titel = 5;
+				SoundManeger->getDecisionSE(); 
+			}
+		}
+
+
+
 
 		if (GameTitel == GAME_PLAY) {
-			check->check(&GameCheck);
+			check->check(GameCheck);
 			if (isTrigger(KEY_Z)) {
-				if (GameCheck == 0) { GameTitel = GAME_WAIT; }
-				if (GameCheck == 1) { GameTitel = GAME_HowToPlay; }
-				if (GameCheck == 2) { GameTitel = GAME_CREDIT; }
-				if (GameCheck == 3) { GameTitel = GAME_END; }
+				SoundManeger->getDecisionSE();
+				Titel = GameCheck;
+				if(Titel==0){ GameStart=GAME_START_WAIT; }
+				else { GameTitel = GAME_PROCESS; }
 			}
 		}
 
-
-		if (GameTitel == GAME_WAIT) {
-			if (Fade->alpha() >= 1) {
-				TitelManeger->changeGameImg();
-				stopSound(Bgm);
-				Bgm = loadSound("ゲームプレイBGM.wav");
-				playLoopSound(Bgm);
-
-				gameInit();
-
-				GameStart = GAME_START_PLAY;
-
-
-
-			}
-			else { Fade->fadeOut(); }
-		}
-
-
-		if (GameTitel == GAME_HowToPlay) {
-			if (TitelManeger->howToPlay()) {
-				GameTitel = GAME_PLAY;
-			}
-		}
-
-		if (GameTitel == GAME_CREDIT) {
-			if (TitelManeger->credit()) {
-				GameTitel = GAME_PLAY;
-			}
-		}
-
-
-		FallManeger->update();
+		Proc->gameSelect(Titel);
 
 		break;
 
 
+	case GAME_START_WAIT:
+			selectLevel();
+			TitelManeger->Level_Draw(GameLevelCheck);
+			if (isTrigger(KEY_X)) {
+				SoundManeger->getDecisionSE();
+				GameStart = GAME_START_TITEL;
+			}
+
+			if (GameLevel != GAME_LEVEL_NULL) {
+				if (Proc->Fadeout()) {
+					gameInit();
+					TitelManeger->changeGameImg();
+					SoundManeger->stopBgm();
+					SoundManeger->getGameBgm();
+					GameStart = GAME_START_PLAY;
+				}
+			}
+			break;
 
 	case GAME_START_PLAY:
 
-		if (Fade->alpha() <= 0) {
+		Proc->gamedraw();
+		if (Proc->FadeIn()) {
+			//残り時間の表示
 			TimeLimit->timeLimitdraw(TimeCnt);
-
-
-			if (FallFruitCnt == 0) {
-				Id = check->fruitIdCheck(rand() % 4);
-
-				FallManeger->appear(Id);
-				FallLotFruitCnt++;
-
-				Id = check->fruitIdCheck(rand() % 4);
-
-				FallManeger->appear(Id);
-
-
-				FallFruitCnt = rand() % 10 + (TimeCnt / 239 + 1) + 30;
-
-				
-				if (FallLotFruitCnt > rand() % 2 + 1) {
-					Id = check->lotFruitIdCheck(rand() % 2);
-					FallManeger->appear(Id);
-					FallLotFruitCnt = 0;
-				}
-				
-			}
-			else { FallFruitCnt--; }
-
-			if (FallItemCnt == 0) {
-
-				Id = check->itemIdCheck(rand() % 4);
-
-
-				if (TimeUpCnt >= 5) {
-					while (Id == 'g') {
-						Id = check->itemIdCheck(rand() % 4);
-					}
-				}
-
-				FallManeger->appear(Id);
-				FallItemCnt = rand() % 60 + 120;
-			}
-			else { FallItemCnt--; }
-
-
-
-
-
-
-			Id = FallManeger->collision(Player->top(), Player->bottom(), Player->left(), Player->right());
-
-			if ('a' <= Id && Id <= 'f') {PlayerScore += FallManeger->getScore(Id); }
-			if (Id == 'g') { TimeCnt += 180; TimeUpCnt++; }
-			if (Id == 'h') { TimeCnt -= 180; }
-			if (Id == 'i') { Player->speedUp(); }
-			if (Id == 'j') { if (Player->adsSpeed() > 5.5f) { Player->speedDown(); } }
-			//Idリセット
-			Id = 0;
-
-
-
+			//フルーツorアイテムの落下
+			Proc->fallFruit(TimeCnt, PlayerScore, GameLevel);
+			Proc->fallItem();
+			//当たり判定
+			Id = Proc->collision();
+			//ここでスコアチェック
+			PlayerScore += Proc->score(Id,PlayerScore);
+			TimeCnt += Proc->item(Id);
 			TimeCnt--;
-
-
-			Player->update();
-			FallManeger->update();
-			Player->draw();
-			FallManeger->draw();
-
-
+			//アップデート＆描画
 			Score->scoredraw(PlayerScore);
-
-
+			//制限時間通知
+			if ((TimeCnt <= 600)&& (TimwNotice == 0)) { TimwNotice = 1; SoundManeger->getTimwNotice();  }
+			else if((TimeCnt >= 600) && (TimwNotice == 1)) { TimwNotice = 0; }
 
 			if (TimeCnt <= 0) {
-
-				Process->seveLoad(GameLevel,PlayerScore);
+				Proc->seveLoad(GameLevel, PlayerScore);
+				SoundManeger->stopBgm();
+				SoundManeger->getScoreBgm();
 				GameStart = GAME_START_SCORE;
 			}
-
-		}
-		else {
-			Fade->fadeIn();
-			FallManeger->draw();
-			Player->draw();
-			FallFruitCnt = C->fallCnt;
-			TimeCnt = C->getIData("TimeCnt");
-
-
 		}
 		break;
 
@@ -210,53 +139,62 @@ void GAME::main() {
 
 	case GAME_START_SCORE:
 
-		if (Fade->alpha() <= 0) {
-			FallManeger->update();
-			FallManeger->draw();
-			Player->draw();
+		Proc->gamedraw();
+		ScoreImg->draw();
+		//ランキングを稼働させる
+		ScoreImg->drawRankScore(PlayerScore);
 
-			ScoreImg->draw();
-			//ランキングを稼働させる
-			ScoreImg->drawRankScore(PlayerScore);
-
-
-			if (isTrigger(KEY_Z)) {
-				TitelManeger->changeTitleImg();
-				FallManeger->deleteAlpha();
-				C->DeleteRank();
-				GameStart = GAME_START_TITEL;
-				GameTitel = GAME_PLAY;
-			}
-
-			
-		}
-		else {
-			Fade->fadeIn();
+		//Zキーを押すとタイトルに戻る
+		if (isPress(KEY_Z)) {
+			SoundManeger->stopBgm();
+			SoundManeger->getTitelBgm();
+			TitelManeger->changeTitleImg();
+			Proc->deleteAlpha();
+			C->DeleteRank();
+			GameStart = GAME_START_TITEL;
+			GameTitel = GAME_PLAY;
+			GameLevel = GAME_LEVEL_NULL;
+			Titel = 5;
 		}
 
 		break;
+
 	}
 
-
-	Fade->draw();
 	present();
 
 }
 
 bool GAME::end() {
-	if (GameTitel == GAME_END) {	
-			return true;
+	if (Titel == 3) {
+		return true;
 	}
 	return false;
 
 }
 
+
+int GAME::selectLevel() {
+	
+	if (isTrigger(KEY_UP)) { GameLevelCheck--; SoundManeger->getSelectSE(); }
+	if (isTrigger(KEY_DOWN)) { GameLevelCheck++; SoundManeger->getSelectSE();}
+	if (GameLevelCheck > 2) { GameLevelCheck = 0; }
+	if (GameLevelCheck < 0) { GameLevelCheck = 2; }
+	
+	if (isTrigger(KEY_Z)) {
+		SoundManeger->getDecisionSE();
+		if (GameLevelCheck == 0) { GameLevel = GAME_LEVEL_EASY; }
+		if (GameLevelCheck == 1) { GameLevel = GAME_LEVEL_NORMAL; }
+		if (GameLevelCheck == 2) { GameLevel = GAME_LEVEL_HARD; }
+	}
+
+
+	return GameLevelCheck;
+
+}
+
+
 void GAME::gameInit() {
-
-
 	TimeCnt = C->getIData("TimeCnt");
-	FallFruitCnt = C->getIData("fallCnt");
-	FallItemCnt = C->getIData("fallCnt");
-
 	PlayerScore = 0;
 }

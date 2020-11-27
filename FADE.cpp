@@ -11,6 +11,6 @@ FADE::FADE() {
 	Alpha = 0;
 }
 
-void FADE::draw(float px) {
+void FADE::draw() {
 	drawImage(Img, Px, Py, COLOR(Rad, Green, Blue, Alpha));
 }

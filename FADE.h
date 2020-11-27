@@ -4,5 +4,5 @@
 class FADE:public IMG {
 public:
 	FADE();
-	void draw(float px);
+	void draw();
 };

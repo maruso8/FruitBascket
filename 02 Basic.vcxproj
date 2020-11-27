@@ -202,8 +202,10 @@
     <ClInclude Include="FALL.h" />
     <ClInclude Include="FALL_APPLE.h" />
     <ClInclude Include="FALL_BANANA.h" />
+    <ClInclude Include="FALL_CHESTNUT.h" />
     <ClInclude Include="FALL_DOWN_CLOCK.h" />
     <ClInclude Include="FALL_DOWN_SHOES.h" />
+    <ClInclude Include="FALL_DURIAN.h" />
     <ClInclude Include="FALL_UP_CLOCK.h" />
     <ClInclude Include="FALL_MANEGER.h" />
     <ClInclude Include="FALL_ORANGE.h" />
@@ -212,6 +214,7 @@
     <ClInclude Include="FALL_STRAWBERRY.h" />
     <ClInclude Include="FALL_UP_SHOES.h" />
     <ClInclude Include="GAME.h" />
+    <ClInclude Include="NEEDLE.h" />
     <ClInclude Include="PROCESS.h" />
     <ClInclude Include="ID_DATA.h" />
     <ClInclude Include="IMG_DATA.h" />
@@ -226,6 +229,7 @@
     <ClInclude Include="TIME_LIMIT.h" />
     <ClInclude Include="TITLE.h" />
     <ClInclude Include="TITLE_MANEGER.h" />
+    <ClInclude Include="FALL_TOMATO.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

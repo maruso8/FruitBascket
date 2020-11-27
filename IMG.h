@@ -9,6 +9,7 @@ public:
 	virtual void changeTitleImg() {};
 	virtual void changeGameImg() {};
 	virtual void drawRankScore(int score) {};
+	virtual void Leveldraw(float py) {};
 	void fadeIn();
 	void fadeOut();
 	float alpha();

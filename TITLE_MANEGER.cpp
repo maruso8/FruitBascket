@@ -7,7 +7,7 @@
 #include"CREDIT.h"
 #include"SIGNAL.h"
 #include"BACK_GROUND.h"
-#include"GAME.h"
+#include"SOUND_MANEGER.h"
 #include"input.h"
 
 CONTAINER* TITLE_MANEGER::C = 0;
@@ -20,6 +20,7 @@ TITLE_MANEGER::TITLE_MANEGER() {
 	HowToPlay = new HOWTOPLAY;
 	Credit = new CREDIT;
 	Signal = new SIGNAL;
+	SoundManeger = new SOUND_MANEGER;
 
 }
 
@@ -30,6 +31,7 @@ TITLE_MANEGER::~TITLE_MANEGER() {
 	delete HowToPlay;
 	delete Credit;
 	delete Signal;
+	delete SoundManeger;
 }
 
 void TITLE_MANEGER::backGround_Draw() {BackGround->draw();}
@@ -37,12 +39,22 @@ void TITLE_MANEGER::backGround_Draw() {BackGround->draw();}
 void TITLE_MANEGER::title_Draw(int gameCheck) {
 	Title->draw();
 	Select->draw();
+
 	for (int i = 0; i < 4; i++) {
 		if (gameCheck == i) {
+			if (gameCheck != SE) {
+				SE = gameCheck;
+				SoundManeger->getSelectSE();
+			}
 			Signal->draw(i * Select->selectHeight());
 		}
 	}
 }
+
+void TITLE_MANEGER::Level_Draw(int LevelCheck) {
+	Signal->Leveldraw(LevelCheck);
+}
+
 
 void TITLE_MANEGER::changeTitleImg() { BackGround->changeTitleImg(); }
 

@@ -11,7 +11,18 @@ void CHARACTER::update() {
 
 
 void CHARACTER::draw() {
-	drawImage(Img, Px, Py,0);
+	if (Stan / 5 % 2 == 0) {
+		drawImage(MoveImg, Px, Py, 0);
+	}
+	
+	if (Stan) {
+		Stan--;
+	}
+	else Stan = 0;
+
+	if (Stan <= 0) {
+		stenRecovery();
+	}
 }
 
 
@@ -22,5 +33,6 @@ float CHARACTER::right(){ return Px + Right; }
 
 void CHARACTER::speedUp() { AdsSpeed += 1.5f; }
 void CHARACTER::speedDown() { AdsSpeed -= 1.5f; };
+void CHARACTER::sten() { Stan = 60; AdsSpeed = 0; };
 
 float CHARACTER::adsSpeed() { return AdsSpeed; }

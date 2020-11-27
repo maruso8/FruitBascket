@@ -2,13 +2,17 @@
 
 
 class IMG;
+class SOUND_MANEGER;
 
 class SCORE_IMG :public IMG {
 public:
 	SCORE_IMG();
+	~SCORE_IMG();
 	void drawRankScore(int score);
 	void draw();
 private:
+	SOUND_MANEGER* SoundManeger = 0;
+
 	int ScoreNumImg[10] = { 0 };
 	int RankImg[3] = { 0 };
 	int RankNum = 0;
@@ -23,4 +27,7 @@ private:
 	int num = 0;
 	float PlayerScorePx = 0;
 	float PlayerScorePy = 0;
+	int RankCnt = 0;
+	int rankNum = 0;
+	int SE = 0;
 };

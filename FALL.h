@@ -6,15 +6,18 @@ public:
 
 	FALL(char* name);
 
-	void appear();
-	virtual void update();
+	virtual void appear(float px = 0, float py = 0);
+	virtual bool update();
 	void draw();
 	void deleteAlpha();
 	
-	float top();
+	virtual float top();
 	float bottom();
-	float left();
-	float right();
+	virtual float left();
+	virtual float right();
+
+	float px();
+	float py();
 
 	char id();
 	float alpha();

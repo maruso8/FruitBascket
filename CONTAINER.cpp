@@ -24,6 +24,9 @@ CONTAINER::CONTAINER() {
 		sprintf_s(selectName, "%s_%d.png", "aka", i);
 		selectImg[i] = loadImage(selectName);
 	}
+	for (int i = 0; i < 3; i++) {
+		selectLevelImg[i] = loadImage("小さいタイトル.png");
+	}
 	selectFleamImg = loadImage("タイトルうふふ.png");
 	howToPlayImg = loadImage("play.png");
 	creditImg = loadImage("S.jpg");
@@ -35,6 +38,9 @@ CONTAINER::CONTAINER() {
 	//ゲームメイン画像ロード
 	gameBackGroundImg = loadImage("ゲーム背景.png");
 	playerImg = loadImage("プレイヤー.png");
+	playerRImg = loadImage("プレイヤーL.png");
+	playerLImg = loadImage("プレイヤーR.png");
+
 
 	//スコア画像ロード
 	scoreImg = loadImage("sukoa.png");
@@ -42,10 +48,6 @@ CONTAINER::CONTAINER() {
 	for (int i = 0; i < 10; i++) {
 		scoreNumImg[i] = divideImage(AllNumImg, 75 * i, 0, 75, 75);
 	}
-
-	
-	bgm = loadSound("タイトルBGM.wav");
-
 
 	//スコア画面ロード
 	scoreFreamImg = loadImage("ランキング枠.png");

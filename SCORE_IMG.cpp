@@ -1,9 +1,12 @@
 #include"IMG.h"
 #include"CONTAINER.h"
+#include"SOUND_MANEGER.h"
 #include"SCORE_IMG.h"
 
 
 SCORE_IMG::SCORE_IMG() {
+	SoundManeger = new SOUND_MANEGER;
+
 	FreamImg = C->scoreFreamImg;
 	FreamPx = C->freamPx;
 	FreamPy = C->freamPy;
@@ -30,12 +33,17 @@ SCORE_IMG::SCORE_IMG() {
 
 }
 
+SCORE_IMG::~SCORE_IMG() {
+	delete SoundManeger;
+}
+
 void SCORE_IMG::draw() {
 	drawImage(FreamImg, FreamPx, FreamPy, COLOR(Rad, Green, Blue, Alpha));
 }
 
 void SCORE_IMG::drawRankScore(int score) {
 
+	if (SE == 0) { SoundManeger->getScoreWindowAppearSE(); SE++; }
 
 	//ランキング処理開始----------------------------------------------------------------
 
@@ -69,8 +77,10 @@ void SCORE_IMG::drawRankScore(int score) {
 	}
 
 	//ランキングのスコア表示
+	if (RankCnt >= 45 && RankNum != rankNum) { SoundManeger->getScoreAppearSE(); rankNum++; RankCnt = 0; }
+	else { RankCnt++; }
 
-	for (int i = 0; i < RankNum; i++) {
+	for (int i = 0; i < rankNum; i++) {
 		place = 10000;
 		num = 0;
 

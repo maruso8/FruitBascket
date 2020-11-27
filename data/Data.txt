@@ -1,6 +1,6 @@
-10
-10
-39
+14
+14
+55
 
 appleImg.png 0
 bananaImg.png 0
@@ -12,6 +12,10 @@ clockUpImg.png 0
 clockDownImg.png 0
 shoesUpImg.png 0
 shoesDownImg.png 0
+tomatoImg.png 0
+chestnutImg.png 0
+durianImg.png 0
+needleImg.png 0
 
 appleId a
 strawberryId b
@@ -23,6 +27,10 @@ clockUpId g
 clockDownId h
 shoesUpId i
 shoesDownId j
+tomatoId k
+chestnutId l
+durianId m
+needleId n
 
 TimeCnt 3600
 fallCnt 10
@@ -58,18 +66,39 @@ rotOrangeAdsSpeed 5
 rotOrangeAlpha 0
 rotOrangeScore -200
 
-NumClockUp 5
+NumClockUp 3
 clockUpAdsSpeed 5
 clockUpAlpha 0
 
-NumClockDown 5
+NumClockDown 3
 clockDownAdsSpeed 5
 clockDownAlpha 0
 
-NumShoesUp 5
+NumShoesUp 3
 shoesUpAdsSpeed 5
 shoesUpAlpha 0
 
-NumShoesDown 5
+NumShoesDown 3
 shoesDownAdsSpeed 5
 shoesDownAlpha 0
+
+NumTomato 7
+tomatoAdsSpeed 3
+tomatoAlpha 0
+tomatoScore 0
+
+NumChestnut 7
+chestnutAdsSpeed 4
+chestnutAlpha 0
+chestnutScore 50
+
+NumDurian 5
+durianAdsSpeed 5
+durianAlpha 0
+durianScore 0
+
+NumNeedle 5
+needleAdsSpeed 0
+needleAlpha 0
+needleScore 0
+

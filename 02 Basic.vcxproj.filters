@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="CHECK.cpp" />
     <ClCompile Include="FALL.cpp">
       <Filter>GAME_IMG\FALL</Filter>
     </ClCompile>
@@ -59,9 +58,11 @@
     <ClCompile Include="PROCESS.cpp">
       <Filter>GAME</Filter>
     </ClCompile>
+    <ClCompile Include="CHECK.cpp">
+      <Filter>GAME</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CHECK.h" />
     <ClInclude Include="FALL.h">
       <Filter>GAME_IMG\FALL</Filter>
     </ClInclude>
@@ -160,6 +161,21 @@
     </ClInclude>
     <ClInclude Include="PROCESS.h">
       <Filter>GAME</Filter>
+    </ClInclude>
+    <ClInclude Include="FALL_TOMATO.h">
+      <Filter>GAME_IMG\FALL\FALL_FRUIT</Filter>
+    </ClInclude>
+    <ClInclude Include="FALL_CHESTNUT.h">
+      <Filter>GAME_IMG\FALL\FALL_FRUIT</Filter>
+    </ClInclude>
+    <ClInclude Include="FALL_DURIAN.h">
+      <Filter>GAME_IMG\FALL\FALL_FRUIT</Filter>
+    </ClInclude>
+    <ClInclude Include="CHECK.h">
+      <Filter>GAME</Filter>
+    </ClInclude>
+    <ClInclude Include="NEEDLE.h">
+      <Filter>GAME_IMG\FALL\FALL_ITEM</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
