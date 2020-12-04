@@ -11,6 +11,7 @@
 #include"PROCESS.h"
 
 
+CONTAINER* CONTAINER::C = 0;
 
 
 CONTAINER::CONTAINER() {
@@ -25,10 +26,11 @@ CONTAINER::CONTAINER() {
 		selectImg[i] = loadImage(selectName);
 	}
 	for (int i = 0; i < 3; i++) {
-		selectLevelImg[i] = loadImage("小さいタイトル.png");
+		sprintf_s(selectName, "%s_%d.png", "Lv", i);
+		selectLevelImg[i] = loadImage(selectName);
 	}
 	selectFleamImg = loadImage("タイトルうふふ.png");
-	howToPlayImg = loadImage("play.png");
+	howToPlayImg = loadImage("遊び方の枠背景new.png");
 	creditImg = loadImage("S.jpg");
 	signalImg = loadImage("矢印.png");
 
@@ -57,14 +59,25 @@ CONTAINER::CONTAINER() {
 		rankNumImg[i] = loadImage(name);
 	}
 
-	//CONTAINERを渡すとこ----------------------------------------------------
-	CHARACTER::setContainer(this);
-	FALL::setContainer(this);
-	FALL_MANEGER::setContainer(this);
-	IMG::setContainer(this);
-	TITLE_MANEGER::setContainer(this);
-	PROCESS::setContainer(this);
-	
+}
+
+CONTAINER* CONTAINER::getInstance() {
+	if (!C) {//C(CONTAINER)が存在しないとき
+		//コンテナを作る
+		C = new CONTAINER;
+	}
+
+	//CONTAINERを渡す
+	return C;
+}
+
+CONTAINER* CONTAINER::Delete() {
+	if (C) {//CONTAINERが存在する時
+		//deleteして0クリア
+		delete C;
+		C = 0;
+	}
+	return C;
 }
 
 
@@ -182,48 +195,36 @@ char CONTAINER::getCData(const char* name) {
 	return 0;
 }
 
-int CONTAINER::saveData(const char* filename, int score) {
+int CONTAINER::saveData(int Level, int score) {
 
-	FILE* fp;
 	rank = new RANK[TotalRankNum];
 
 
-
-	fopen_s(&fp, filename, "rb");
+	FILE* fp;
+	fp = fopen ("score.dat", "rb");
 	//fpが存在しないときは偽を返してここで停止して注意が出る。#include<cassert>で使えるようになる。
 	assert(fp != NULL);
-
-	//個々の修正をする！
-	//SEをやる
-
-	for (int i = 0; i < 3; i++) {
-		fread(&rank[i].Rank, sizeof(char), 5, fp);
-		fread(&rank[i].RankScore, sizeof(int), 1, fp);
-	}
+	fread(&rank[0], sizeof(RANK) * 3, 1, fp);
 
 	fclose(fp);
 
-
+	assert(rank[0].RankScore != 0);
 
 	//ここからセーブ開始
-	fopen_s(&fp, filename, "wb");
-	assert(fp == NULL);
+	fopen_s(&fp, "score.dat", "wb");
+	assert(fp != NULL);
 
 	//比較
 	for (int i = 0; i < 3; i++) {
-		if (score > rank[i].RankScore) {
-			float work = rank[i].RankScore;
-			rank[i].RankScore = score;
+		if (score > rank[Level].RankScore[i]) {
+			float work = rank[Level].RankScore[i];
+			rank[Level].RankScore[i] = score;
 			score = work;
 		}
 	}
 
 	//書き込み開始
-	for (int i = 0; i < 3; i++) {
-		fwrite(&rank[i].Rank, sizeof(char), 5, fp);
-		fwrite(&rank[i].RankScore, sizeof(int), 1, fp);
-	};
-
+	fwrite(&rank[0], sizeof(RANK)*3 , 1, fp);
 	fclose(fp);
 
 	return 0;

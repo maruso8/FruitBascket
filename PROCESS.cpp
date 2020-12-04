@@ -12,40 +12,60 @@
 #include"SOUND_MANEGER.h"
 
 
-CONTAINER* PROCESS::C = 0;
-
+PROCESS* PROCESS::Proc=0;
+CONTAINER* PROCESS::C=0;
+FALL_MANEGER* PROCESS::FallManeger=0;
+TITLE_MANEGER* PROCESS::TitelManeger=0;
+SOUND_MANEGER* PROCESS::SoundManeger=0;
 
 PROCESS::PROCESS() {
-	FallManeger = new FALL_MANEGER;
+	C = CONTAINER::getInstance();
+	FallManeger = FALL_MANEGER::getInstans();
+	TitelManeger = TITLE_MANEGER::getInstans();
+	SoundManeger = SOUND_MANEGER::getInstans();
+
 	Player = new PLAYER;
 	check = new CHECK;
-	TitelManeger = new TITLE_MANEGER;
 	Fade = new FADE;
-	SoundManeger = new SOUND_MANEGER;
 }
 
 
+PROCESS* PROCESS::getInstans() {
+	if (!Proc) {
+		Proc = new PROCESS;
+	}
+	return Proc;
+}
+
+
+PROCESS* PROCESS::Delete() {
+	if (Proc) {
+		delete Proc;
+		Proc = 0;
+	}
+	return Proc;
+}
+
+
+
 PROCESS::~PROCESS() {
-	delete FallManeger;
+	CONTAINER::Delete();
+	FALL_MANEGER::Delete();
+	TITLE_MANEGER::Delete();
+	SOUND_MANEGER::Delete();
 	delete Player;
 	delete check;
-	delete TitelManeger;
 	delete Fade;
-	delete SoundManeger;
 }
 
 
 void PROCESS::ProcInit() {
 	FallFruitCnt = C->getIData("fallCnt");
 	FallItemCnt = C->getIData("fallCnt");
-
 }
 
 void PROCESS::gameSelect(int GameTitel) {
-
-
 	switch (GameTitel) {
-
 	case 0:
 
 		break;
@@ -62,15 +82,24 @@ void PROCESS::gameSelect(int GameTitel) {
 	}
 }
 
-int PROCESS::score(char Id, int score) {
+
+int PROCESS::score(char Id, int score,int Level) {
 	if ('a' <= Id && Id <= 'f' || 'k' <= Id && Id <= 'm') {
 		if ('a' <= Id && Id <= 'd'|| 'k' <= Id && Id <= 'l') {
 			SoundManeger->getFruitGetSE();
 		}
 		else { SoundManeger->getRotFruitGetSE(); }
 
-		if (Id == 'm') {return -score / 2;}
 
+		float num = 0;
+		if (Level == 0) { num = 0.5f; }
+		if (Level == 1) { num = 1.0f; }
+		if (Level == 2) { num = 1.5f; }
+
+		if (Id == 'm') {return -score / 2;}
+		if ('a' <= Id && Id <= 'd' || 'k' <= Id && Id <= 'l') {
+			return FallManeger->getScore(Id) * num;
+		}
 		return FallManeger->getScore(Id);
 	}
 	return 0;
@@ -156,23 +185,10 @@ void PROCESS::gamedraw() {
 	FallManeger->draw();
 }
 
-void PROCESS::seveLoad(int Level, int score) {
-	switch (Level)
-	{
-	case 0:
-		C->saveData("data/score.easy.dat", score);
-		break;
-	case 1:
-		C->saveData("data/score.normal.dat", score);
-		break;
-
-	case 2:
-		C->saveData("data/score.hard.dat", score);
-		break;
-
-	
-	}
-
+void PROCESS::scoredraw() {
+	FallManeger->update();
+	Player->draw();
+	FallManeger->draw();
 }
 
 void PROCESS::deleteAlpha() {
@@ -204,3 +220,11 @@ bool PROCESS::Fadeout() {
 		return false;
 	}
 }
+
+
+void PROCESS::flagOn() { Flag = 1; }
+void PROCESS::flagOff() { Flag = 0; }
+bool PROCESS::flag() {
+	if (Flag == 1) { return true; }
+	else { return false; }
+};

@@ -6,11 +6,15 @@
 CONTAINER* IMG::C = 0;
 
 IMG::IMG() {
+	C = CONTAINER::getInstance();
 	FreamImg = C->freamImg;
 	FreamPx = C->freamPx;
 	FreamPy = C->freamPy;
 	SelectHeight = C->selectHeight;
 	
+}
+IMG::~IMG() {
+	CONTAINER::Delete();
 }
 
 void IMG::draw(float px) {

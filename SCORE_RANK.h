@@ -1,14 +1,14 @@
 #pragma once
-
-
 class IMG;
 class SOUND_MANEGER;
 
-class SCORE_IMG :public IMG {
+class SCORE_RANK :public IMG {
 public:
-	SCORE_IMG();
-	~SCORE_IMG();
-	void drawRankScore(int score);
+	SCORE_RANK();
+	~SCORE_RANK();
+	void rankInit();
+	bool drawRankScore(int Level,int score);
+	void skipRankDraw();
 	void draw();
 private:
 	SOUND_MANEGER* SoundManeger = 0;
@@ -27,6 +27,7 @@ private:
 	int num = 0;
 	float PlayerScorePx = 0;
 	float PlayerScorePy = 0;
+
 	int RankCnt = 0;
 	int rankNum = 0;
 	int SE = 0;

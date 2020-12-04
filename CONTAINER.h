@@ -16,19 +16,20 @@
 //DATAの値を入れるところ。
 
 class CONTAINER {
-	
+
 	class DATA* Data = 0;
-	class ID_DATA*IdData = 0;
+	class ID_DATA* IdData = 0;
 	class IMG_DATA* ImgData = 0;
 
 	int DataNum[3] = { 0 };
 
 	int TotalRankNum = 3;
-	
+
+	CONTAINER();
+	static CONTAINER* C;
 
 
 public:
-	CONTAINER();
 	~CONTAINER();
 	//ファイルからデータを読み込む
 	int LoadData(const char* filename);
@@ -39,16 +40,22 @@ public:
 	//データをchar値で取得
 	char getCData(const char* name);
 	//ファイルにデータを書き込む
-	int saveData(const char* filename, int score);
+	int saveData(int Level, int score);
 	//ランクを消して容量確保
 	void DeleteRank();
 
+
+	//シングルトンの実装--------------------------------------------------------
+	static CONTAINER* getInstance();
+	static CONTAINER* Delete();
+
+
+
 	int bgm = 0;
 	//CONTAINER内外で使うデータ-------------------------------------------------
-	class RANK {
-	public:
-		char Rank[5] = {};
-		int RankScore = 0;
+
+	struct RANK {
+		int RankScore[3] = {};
 	};
 
 
@@ -91,7 +98,7 @@ public:
 	const COLOR selectColor = COLOR(1.0f, 1.0f, 1.0f, 0.5f);
 	const int selectNum = 4;
 
-	const float LevelPx = 650;
+	const float LevelPx = 640;
 	const float LevelPy = 300;
 
 	const float LevelSelectPx = 1250;
@@ -152,8 +159,8 @@ public:
 	const float playerHitRight = 50.0f;//74
 
 	//スコア関連-------------------------------------------------------
-	//SCORE
-	int scoreFreamImg = 0;
+
+	int scoreFreamImg;
 	int rankNumImg[3] = { 0 };
 	const int rankNum = 3;
 	const float rankPx = 900.0f;
@@ -164,7 +171,6 @@ public:
 	const float scoreSpace = 200.0f;
 	const float PlayerScorePx = 750.0f;
 	const float PlayerScorePy = 850.0f;
-
 
 
 };

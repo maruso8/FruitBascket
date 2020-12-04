@@ -3,10 +3,11 @@
 #include<stdlib.h>
 
 
-CONTAINER* FALL::C = 0;
+CONTAINER* FALL::C=0;
 
 
 FALL::FALL(char* name) {
+	C = CONTAINER::getInstance();
 	setImg(name);
 	setId(name);
 	setAdsSpeed(name);

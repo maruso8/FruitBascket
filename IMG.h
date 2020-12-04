@@ -5,6 +5,7 @@ class CONTAINER;
 class IMG {
 public:
 	IMG();
+	~IMG();
 	virtual void draw(float px = 0);
 	virtual void changeTitleImg() {};
 	virtual void changeGameImg() {};
@@ -14,7 +15,6 @@ public:
 	void fadeOut();
 	float alpha();
 	virtual float selectHeight();
-	static void setContainer(CONTAINER* c) { C = c; }
 
 protected:
 	int Img = 0;

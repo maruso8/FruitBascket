@@ -1,6 +1,4 @@
 #pragma once
-
-
 class IMG;
 
 class SCORE :public IMG {

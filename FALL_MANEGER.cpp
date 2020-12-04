@@ -19,8 +19,11 @@
 
 
 CONTAINER* FALL_MANEGER::C = 0;
+FALL_MANEGER* FALL_MANEGER::FallManeger = 0;
 
 FALL_MANEGER::FALL_MANEGER() {
+
+	FALL_MANEGER::C = CONTAINER::getInstance();
 	
 	Total += C->getIData("Numapple");
 	Total += C->getIData("NumBanana");
@@ -61,7 +64,26 @@ FALL_MANEGER::~FALL_MANEGER() {
 		delete AllFall[i];
 	}
 	delete[] AllFall;
+	CONTAINER::Delete();
 }
+
+
+
+FALL_MANEGER* FALL_MANEGER::getInstans() {
+	if (!FallManeger) {
+		FallManeger = new FALL_MANEGER;
+	}
+	return FallManeger;
+}
+
+FALL_MANEGER* FALL_MANEGER::Delete() {
+	if (FallManeger) {
+		delete FallManeger;
+		FallManeger = 0;
+	}
+	return FallManeger;
+}
+
 
 
 void FALL_MANEGER::appear(char Id) {

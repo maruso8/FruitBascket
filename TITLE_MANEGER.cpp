@@ -10,19 +10,38 @@
 #include"SOUND_MANEGER.h"
 #include"input.h"
 
+
 CONTAINER* TITLE_MANEGER::C = 0;
+TITLE_MANEGER* TITLE_MANEGER::TitleManeger = 0;
+SOUND_MANEGER* TITLE_MANEGER::SoundManeger = 0;
 
 TITLE_MANEGER::TITLE_MANEGER() {
-
+	C = CONTAINER::getInstance();
+	SoundManeger = SOUND_MANEGER::getInstans();
 	BackGround = new BACK_GROUND;
 	Title = new TITLE;
 	Select = new SELECT;
 	HowToPlay = new HOWTOPLAY;
 	Credit = new CREDIT;
 	Signal = new SIGNAL;
-	SoundManeger = new SOUND_MANEGER;
 
 }
+
+TITLE_MANEGER* TITLE_MANEGER::getInstans() {
+	if (!TitleManeger) {
+		TitleManeger = new TITLE_MANEGER;
+	}
+	return TitleManeger;
+}
+
+TITLE_MANEGER* TITLE_MANEGER::Delete() {
+	if (TitleManeger) {
+		delete TitleManeger;
+		TitleManeger = 0;
+	}
+	return TitleManeger;
+}
+
 
 TITLE_MANEGER::~TITLE_MANEGER() {
 	delete BackGround;
@@ -31,7 +50,6 @@ TITLE_MANEGER::~TITLE_MANEGER() {
 	delete HowToPlay;
 	delete Credit;
 	delete Signal;
-	delete SoundManeger;
 }
 
 void TITLE_MANEGER::backGround_Draw() {BackGround->draw();}

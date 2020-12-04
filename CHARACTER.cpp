@@ -1,12 +1,17 @@
 #include"graphic.h"
+#include"CONTAINER.h"
 #include"CHARACTER.h"
 
 
 CONTAINER* CHARACTER::C = 0;
 
 
-void CHARACTER::update() {
+CHARACTER::CHARACTER() {
+	C = CONTAINER::getInstance();
+}
 
+CHARACTER::~CHARACTER() {
+	CONTAINER::Delete();
 }
 
 

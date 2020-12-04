@@ -4,8 +4,11 @@ class CONTAINER;
 
 class CHARACTER {
 public:
-	
-	virtual void update();
+
+	CHARACTER();
+	~CHARACTER();
+
+	virtual void update() {};
 	void draw();
 	float top();
 	float bottom();
@@ -17,7 +20,8 @@ public:
 	float adsSpeed();
 	void sten();
 	virtual void stenRecovery() {};
-	static void setContainer(CONTAINER* c) { C = c; }
+	
+
 
 protected:
 	int MoveImg = 0;
@@ -37,6 +41,6 @@ protected:
 	float Right = 0.0f;
 
 	int Stan = 0;
-
 	static CONTAINER* C;
+
 };

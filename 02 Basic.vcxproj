@@ -180,7 +180,8 @@
     <ClCompile Include="PLAYER.cpp" />
     <ClCompile Include="IMG.cpp" />
     <ClCompile Include="SCORE.cpp" />
-    <ClCompile Include="SCORE_IMG.cpp" />
+    <ClCompile Include="SCORE_RANK.cpp" />
+    <ClCompile Include="SCORE_MANEGER.cpp" />
     <ClCompile Include="SELECT.cpp" />
     <ClCompile Include="SOUND_MANEGER.cpp" />
     <ClCompile Include="TIME_LIMIT.cpp" />
@@ -219,7 +220,8 @@
     <ClInclude Include="ID_DATA.h" />
     <ClInclude Include="IMG_DATA.h" />
     <ClInclude Include="SCORE.h" />
-    <ClInclude Include="SCORE_IMG.h" />
+    <ClInclude Include="SCORE_RANK.h" />
+    <ClInclude Include="SCORE_MANEGER.h" />
     <ClInclude Include="SELECT.h" />
     <ClInclude Include="PLAYER.h" />
     <ClInclude Include="HowToPlay.h" />

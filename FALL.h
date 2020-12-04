@@ -31,7 +31,6 @@ public:
 	
 
 	int score();
-	static void setContainer(CONTAINER* c) { C = c; }
 
 protected:
 	int Img = 0;

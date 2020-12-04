@@ -1,6 +1,9 @@
 #include"SOUND_MANEGER.h"
 #include"sound.h"
 
+
+SOUND_MANEGER* SOUND_MANEGER::SoundManeger = 0;
+
 SOUND_MANEGER::SOUND_MANEGER() {
 	TitelBgm = loadSound("タイトルBGM.wav");
 	GameBgm = loadSound("ゲームプレイBGM.wav");
@@ -19,6 +22,24 @@ SOUND_MANEGER::SOUND_MANEGER() {
 	ScoreAppearSE = loadSound("スコア表示SE.wav");
 	ScoreWindowAppearSE = loadSound("スコア画面表示.wav");
 }
+
+
+SOUND_MANEGER* SOUND_MANEGER::getInstans() {
+	if (!SoundManeger) {
+		SoundManeger = new SOUND_MANEGER;
+	}
+	return SoundManeger;
+}
+
+SOUND_MANEGER* SOUND_MANEGER::Delete() {
+	if (SoundManeger) {
+		delete SoundManeger;
+		SoundManeger = 0;
+	}
+	return SoundManeger;
+}
+
+
 
 
 void SOUND_MANEGER::getTitelBgm() { playLoopSound(TitelBgm); }

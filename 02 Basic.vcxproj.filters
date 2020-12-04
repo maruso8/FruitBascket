@@ -2,10 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="FALL.cpp">
-      <Filter>GAME_IMG\FALL</Filter>
+      <Filter>GAME_DATA\FALL</Filter>
     </ClCompile>
     <ClCompile Include="FALL_MANEGER.cpp">
-      <Filter>GAME_IMG\FALL</Filter>
+      <Filter>GAME_DATA\FALL</Filter>
     </ClCompile>
     <ClCompile Include="GAME.cpp">
       <Filter>GAME</Filter>
@@ -29,10 +29,10 @@
       <Filter>FADE</Filter>
     </ClCompile>
     <ClCompile Include="SCORE.cpp">
-      <Filter>GAME_IMG\SCORE</Filter>
+      <Filter>SCORE_MANEGER\SCORE</Filter>
     </ClCompile>
     <ClCompile Include="TIME_LIMIT.cpp">
-      <Filter>GAME_IMG\TIME_LIMIT</Filter>
+      <Filter>GAME_DATA\TIME_LIMIT</Filter>
     </ClCompile>
     <ClCompile Include="SOUND_MANEGER.cpp">
       <Filter>SOUND_MANEGER</Filter>
@@ -46,9 +46,6 @@
     <ClCompile Include="main.cpp">
       <Filter>GAME</Filter>
     </ClCompile>
-    <ClCompile Include="SCORE_IMG.cpp">
-      <Filter>SCORE_IMG</Filter>
-    </ClCompile>
     <ClCompile Include="IMG_DATA.cpp">
       <Filter>ALL_DATA</Filter>
     </ClCompile>
@@ -61,13 +58,19 @@
     <ClCompile Include="CHECK.cpp">
       <Filter>GAME</Filter>
     </ClCompile>
+    <ClCompile Include="SCORE_MANEGER.cpp">
+      <Filter>SCORE_MANEGER</Filter>
+    </ClCompile>
+    <ClCompile Include="SCORE_RANK.cpp">
+      <Filter>SCORE_MANEGER\SCORE_RANK</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FALL.h">
-      <Filter>GAME_IMG\FALL</Filter>
+      <Filter>GAME_DATA\FALL</Filter>
     </ClInclude>
     <ClInclude Include="FALL_MANEGER.h">
-      <Filter>GAME_IMG\FALL</Filter>
+      <Filter>GAME_DATA\FALL</Filter>
     </ClInclude>
     <ClInclude Include="GAME.h">
       <Filter>GAME</Filter>
@@ -106,40 +109,40 @@
       <Filter>FADE</Filter>
     </ClInclude>
     <ClInclude Include="FALL_APPLE.h">
-      <Filter>GAME_IMG\FALL\FALL_FRUIT</Filter>
+      <Filter>GAME_DATA\FALL\FALL_FRUIT</Filter>
     </ClInclude>
     <ClInclude Include="FALL_BANANA.h">
-      <Filter>GAME_IMG\FALL\FALL_FRUIT</Filter>
+      <Filter>GAME_DATA\FALL\FALL_FRUIT</Filter>
     </ClInclude>
     <ClInclude Include="FALL_ORANGE.h">
-      <Filter>GAME_IMG\FALL\FALL_FRUIT</Filter>
+      <Filter>GAME_DATA\FALL\FALL_FRUIT</Filter>
     </ClInclude>
     <ClInclude Include="FALL_STRAWBERRY.h">
-      <Filter>GAME_IMG\FALL\FALL_FRUIT</Filter>
+      <Filter>GAME_DATA\FALL\FALL_FRUIT</Filter>
     </ClInclude>
     <ClInclude Include="FALL_ROT_APPLE.h">
-      <Filter>GAME_IMG\FALL\FALL_FRUIT</Filter>
+      <Filter>GAME_DATA\FALL\FALL_FRUIT</Filter>
     </ClInclude>
     <ClInclude Include="FALL_ROT_ORANGE.h">
-      <Filter>GAME_IMG\FALL\FALL_FRUIT</Filter>
+      <Filter>GAME_DATA\FALL\FALL_FRUIT</Filter>
     </ClInclude>
     <ClInclude Include="FALL_UP_CLOCK.h">
-      <Filter>GAME_IMG\FALL\FALL_ITEM</Filter>
+      <Filter>GAME_DATA\FALL\FALL_ITEM</Filter>
     </ClInclude>
     <ClInclude Include="FALL_DOWN_CLOCK.h">
-      <Filter>GAME_IMG\FALL\FALL_ITEM</Filter>
+      <Filter>GAME_DATA\FALL\FALL_ITEM</Filter>
     </ClInclude>
     <ClInclude Include="FALL_UP_SHOES.h">
-      <Filter>GAME_IMG\FALL\FALL_ITEM</Filter>
+      <Filter>GAME_DATA\FALL\FALL_ITEM</Filter>
     </ClInclude>
     <ClInclude Include="FALL_DOWN_SHOES.h">
-      <Filter>GAME_IMG\FALL\FALL_ITEM</Filter>
+      <Filter>GAME_DATA\FALL\FALL_ITEM</Filter>
     </ClInclude>
     <ClInclude Include="SCORE.h">
-      <Filter>GAME_IMG\SCORE</Filter>
+      <Filter>SCORE_MANEGER\SCORE</Filter>
     </ClInclude>
     <ClInclude Include="TIME_LIMIT.h">
-      <Filter>GAME_IMG\TIME_LIMIT</Filter>
+      <Filter>GAME_DATA\TIME_LIMIT</Filter>
     </ClInclude>
     <ClInclude Include="SOUND_MANEGER.h">
       <Filter>SOUND_MANEGER</Filter>
@@ -149,9 +152,6 @@
     </ClInclude>
     <ClInclude Include="DATA.h">
       <Filter>ALL_DATA</Filter>
-    </ClInclude>
-    <ClInclude Include="SCORE_IMG.h">
-      <Filter>SCORE_IMG</Filter>
     </ClInclude>
     <ClInclude Include="IMG_DATA.h">
       <Filter>ALL_DATA</Filter>
@@ -163,19 +163,25 @@
       <Filter>GAME</Filter>
     </ClInclude>
     <ClInclude Include="FALL_TOMATO.h">
-      <Filter>GAME_IMG\FALL\FALL_FRUIT</Filter>
+      <Filter>GAME_DATA\FALL\FALL_FRUIT</Filter>
     </ClInclude>
     <ClInclude Include="FALL_CHESTNUT.h">
-      <Filter>GAME_IMG\FALL\FALL_FRUIT</Filter>
+      <Filter>GAME_DATA\FALL\FALL_FRUIT</Filter>
     </ClInclude>
     <ClInclude Include="FALL_DURIAN.h">
-      <Filter>GAME_IMG\FALL\FALL_FRUIT</Filter>
+      <Filter>GAME_DATA\FALL\FALL_FRUIT</Filter>
     </ClInclude>
     <ClInclude Include="CHECK.h">
       <Filter>GAME</Filter>
     </ClInclude>
     <ClInclude Include="NEEDLE.h">
-      <Filter>GAME_IMG\FALL\FALL_ITEM</Filter>
+      <Filter>GAME_DATA\FALL\FALL_ITEM</Filter>
+    </ClInclude>
+    <ClInclude Include="SCORE_MANEGER.h">
+      <Filter>SCORE_MANEGER</Filter>
+    </ClInclude>
+    <ClInclude Include="SCORE_RANK.h">
+      <Filter>SCORE_MANEGER\SCORE_RANK</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -194,32 +200,35 @@
     <Filter Include="FADE">
       <UniqueIdentifier>{2b0f8773-b0d3-4e97-a2d9-2f9f142697f7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GAME_IMG">
-      <UniqueIdentifier>{9a978605-8656-4798-98cf-9848be8d1f39}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GAME_IMG\FALL">
-      <UniqueIdentifier>{88ebe161-82b1-418e-9b7e-87865d38397d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GAME_IMG\FALL\FALL_FRUIT">
-      <UniqueIdentifier>{fe7c1d29-a91c-422f-abee-8009dc24203a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GAME_IMG\FALL\FALL_ITEM">
-      <UniqueIdentifier>{4fff3022-b7f6-468c-b495-96e3779e757b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GAME_IMG\SCORE">
-      <UniqueIdentifier>{2b63e866-0121-4157-90fb-2a57b140f4bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GAME_IMG\TIME_LIMIT">
-      <UniqueIdentifier>{8718d5c4-e9f4-4b35-ac81-0daa60292173}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SOUND_MANEGER">
       <UniqueIdentifier>{e431a37a-626e-4517-ba28-e14da17912e2}</UniqueIdentifier>
     </Filter>
     <Filter Include="ALL_DATA">
       <UniqueIdentifier>{c22ecd66-0ac0-4a9f-a497-95f2346e06a6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SCORE_IMG">
+    <Filter Include="SCORE_MANEGER">
+      <UniqueIdentifier>{f942bb81-2f01-433d-ba00-b6c2ac0da645}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SCORE_MANEGER\SCORE">
+      <UniqueIdentifier>{2b63e866-0121-4157-90fb-2a57b140f4bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SCORE_MANEGER\SCORE_RANK">
       <UniqueIdentifier>{913ad683-9e29-440b-84f3-b44c23ddffdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GAME_DATA">
+      <UniqueIdentifier>{9a978605-8656-4798-98cf-9848be8d1f39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GAME_DATA\FALL">
+      <UniqueIdentifier>{88ebe161-82b1-418e-9b7e-87865d38397d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GAME_DATA\FALL\FALL_FRUIT">
+      <UniqueIdentifier>{fe7c1d29-a91c-422f-abee-8009dc24203a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GAME_DATA\FALL\FALL_ITEM">
+      <UniqueIdentifier>{4fff3022-b7f6-468c-b495-96e3779e757b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GAME_DATA\TIME_LIMIT">
+      <UniqueIdentifier>{8718d5c4-e9f4-4b35-ac81-0daa60292173}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

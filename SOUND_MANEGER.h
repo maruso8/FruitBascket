@@ -2,7 +2,6 @@
 
 class SOUND_MANEGER {
 public:
-	SOUND_MANEGER();
 	void getTitelBgm();
 	void getGameBgm();
 	void getScoreBgm();
@@ -19,10 +18,16 @@ public:
 	void getScoreAppearSE();
 	void getScoreWindowAppearSE();
 
-
 	void stopBgm();
 
+	static SOUND_MANEGER* getInstans();
+	static SOUND_MANEGER* Delete();
+
+
 private:
+	SOUND_MANEGER();
+	static SOUND_MANEGER* SoundManeger;
+
 	//BGM
 	int TitelBgm = 0;
 	int GameBgm = 0;
@@ -40,6 +45,6 @@ private:
 	//スコア関連SE
 	int ScoreAppearSE = 0;
 	int ScoreWindowAppearSE = 0;
-	
+
 
 };

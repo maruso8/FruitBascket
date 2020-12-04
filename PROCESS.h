@@ -11,11 +11,10 @@ class NEEDLE;
 
 class PROCESS {
 public:
-	PROCESS();
 	~PROCESS();
 	void ProcInit();
 	void seveLoad(int Level,int score);
-	int score(char Id,int score);
+	int score(char Id,int score,int Level);
 	int item(char Id);
 	void fallFruit(int time, int score,int Level);
 	void fallItem();
@@ -23,31 +22,51 @@ public:
 	void deleteAlpha();
 	void gamedraw();
 	void gameSelect(int GameTitel);
-
+	void scoredraw();
 	bool FadeIn();
 	bool Fadeout();
 
+	void flagOn();
+	void flagOff();
+	bool flag();
 
-	static void setContainer(CONTAINER* c) { C = c; };
+	static PROCESS* getInstans();
+	static PROCESS* Delete();
+
 
 private:
+	PROCESS();
+
+
+	static PROCESS* Proc;
+	static CONTAINER* C;
+	static FALL_MANEGER* FallManeger;
+	static TITLE_MANEGER* TitelManeger;
+	static SOUND_MANEGER* SoundManeger;
+
 	int Bgm = 0;
 	char Id = 0;
 	int FallFruitCnt = 0;
 	int FallLotFruitCnt = 0;
 	int FallItemCnt = 0;
 	int TimeUpCnt = 0;
+	int Flag = 0;
 
+	int Title = 0;
+	int end = 0;
+
+	int GameLevel = 0;
+	int GameTitle = 5;
+	int GameCheck = 0;
+	int GameLevelCheck = 0;
 
 	char Name[256] = {};
 	CHARACTER* Player = 0;
-	FALL_MANEGER* FallManeger = 0;
 	CHECK* check = 0;
 	FADE* Fade = 0;
-	TITLE_MANEGER* TitelManeger = 0;
-	SOUND_MANEGER* SoundManeger = 0;
+	
 	NEEDLE* Needle = 0;
 
-	static CONTAINER* C;
+
 };
 

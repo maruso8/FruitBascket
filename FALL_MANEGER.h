@@ -5,17 +5,24 @@ class FALL;
 
 class FALL_MANEGER {
 public:
-	FALL_MANEGER();
 	~FALL_MANEGER();
 	void appear(char Id);
 	virtual void update();
 	void draw();
 	void deleteAlpha();
 	char collision(float top, float bottom, float left, float right);
-
 	int getScore(char id);
-	static void setContainer(CONTAINER* c) { C = c; };
+
+	static FALL_MANEGER* getInstans();
+	static FALL_MANEGER* Delete();
+
+
+
+
 private:
+	FALL_MANEGER();
+	static FALL_MANEGER* FallManeger;
+
 
 	int Total = 0;
 	FALL** AllFall;
