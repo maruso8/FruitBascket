@@ -201,7 +201,7 @@ int CONTAINER::saveData(int Level, int score) {
 
 
 	FILE* fp;
-	fp = fopen ("score.dat", "rb");
+	fp = fopen ("data/score.dat", "rb");
 	//fpが存在しないときは偽を返してここで停止して注意が出る。#include<cassert>で使えるようになる。
 	assert(fp != NULL);
 	fread(&rank[0], sizeof(RANK) * 3, 1, fp);
@@ -211,7 +211,7 @@ int CONTAINER::saveData(int Level, int score) {
 	assert(rank[0].RankScore != 0);
 
 	//ここからセーブ開始
-	fopen_s(&fp, "score.dat", "wb");
+	fopen_s(&fp, "data/score.dat", "wb");
 	assert(fp != NULL);
 
 	//比較
