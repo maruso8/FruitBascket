@@ -6,6 +6,7 @@ class SOUND_MANEGER;
 
 class TITLE_MANEGER {
 public:
+	TITLE_MANEGER();
 	~TITLE_MANEGER();
 	void backGround_Draw();
 	void title_Draw(int gameCheck);
@@ -15,23 +16,23 @@ public:
 	bool howToPlay();
 	bool credit();
 
-	static TITLE_MANEGER* getInstans();
-	static TITLE_MANEGER* Delete();
-
-
 private:
-	TITLE_MANEGER();
-	static TITLE_MANEGER* TitleManeger;
 	static CONTAINER* C;
-	static SOUND_MANEGER* SoundManeger;
-
-
+	
+	
+	SOUND_MANEGER* SoundManeger;
 	IMG* BackGround = 0;
 	IMG* Title = 0;
 	IMG* Select = 0;
-	IMG* HowToPlay = 0;
-	IMG* Credit = 0;
 	IMG* Signal = 0;
 
 	int SE = 0;
+
+	int Img = 0;
+	float Px = 0;
+	float Py = 0;
+	int Flag = 0;
+	int HowToPage = 0;
+
+
 };

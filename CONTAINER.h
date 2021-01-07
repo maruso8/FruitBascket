@@ -15,8 +15,43 @@
 
 //DATAの値を入れるところ。
 
-class CONTAINER {
+struct CONTAINER {
 
+	//CONTAINER内外で使うデータと関数------------------------------------------
+	~CONTAINER();
+	//ファイルからデータを読み込む
+	int LoadData(const char* filename);
+	//データをint値で取得
+	int getIData(const char* name);
+	//データをfloat値で取得
+	float getFData(const char* name);
+	//データをchar値で取得
+	char getCData(const char* name);
+	//ファイルにデータを書き込む
+	int saveData(int Level, int score);
+
+
+	//シングルトンの実装--------------------------------------------------------
+	static CONTAINER* getInstance();
+	static CONTAINER* Delete();
+
+	int bgm = 0;
+
+
+	struct RANK {
+		int RankScore[3] = {};
+	};
+
+	//構造体--------------------------------------------------------------------
+
+
+
+	RANK* rank = 0;
+
+
+
+
+private:
 	class DATA* Data = 0;
 	class ID_DATA* IdData = 0;
 	class IMG_DATA* ImgData = 0;
@@ -30,50 +65,20 @@ class CONTAINER {
 
 
 public:
-	~CONTAINER();
-	//ファイルからデータを読み込む
-	int LoadData(const char* filename);
-	//データをint値で取得
-	int getIData(const char* name);
-	//データをfloat値で取得
-	float getFData(const char* name);
-	//データをchar値で取得
-	char getCData(const char* name);
-	//ファイルにデータを書き込む
-	int saveData(int Level, int score);
-	//ランクを消して容量確保
-	void DeleteRank();
-
-
-	//シングルトンの実装--------------------------------------------------------
-	static CONTAINER* getInstance();
-	static CONTAINER* Delete();
-
-
-
-	int bgm = 0;
-	//CONTAINER内外で使うデータ-------------------------------------------------
-
-	struct RANK {
-		int RankScore[3] = {};
-	};
-
-
-	RANK* rank = 0;
-
-	//ここからCONTAINER外のデータ------------------------------------------------
-
-	//SYSTEM 
+	
+	//CONTAINER外のデータ------------------------------------------------
+	//SYSTEM
 	const int windowWidht = 1920;//1920
 	const int windowHeight = 1080;//1080
 	const int fallCnt = 100;
 	int fadeinImg = 0;
-	float fadePx = 0.0f;
-	float fadePy = 0.0f;
-	COLOR fadeColor = COLOR(1, 1, 1, 0);
-	float fadeDecayAlpha = 1.0f / 50.0f;
+	const float fadePx = 0.0f;
+	const float fadePy = 0.0f;
+	const COLOR fadeColor = COLOR(1, 1, 1, 0);
+	const float fadeDecayAlpha = 1.0f / 50.0f;
 	//タイトル関連----------------------------------------------------------------
-	//BACK_GROUND 
+
+	//BACK_GROUND
 	int backGroundImg = 0;
 	int gameBackGroundImg = 0;
 	const float backGroundPx = 0.0f;
@@ -85,11 +90,13 @@ public:
 	const float titlePx = 1120.0f;
 	const float titlePy = 0.0f;
 	const int titleNum = 1;
+	const int TitleScene = 5;
 
 	//SELECT 
 	int selectImg[4] = { };
 	int selectLevelImg[3] = { };
 	int selectFleamImg = 0;
+	int levelSelectFleamImg = 0;
 	char selectName[256];
 	const int TotalSelect = 4;
 	const float selectPx = 50.0f;
@@ -112,17 +119,12 @@ public:
 	const float freamPy = 50.0f;
 	const int freamNum = 1;
 
-	//HowToPlay 
-	int howToPlayImg = 0;
-	const float howToPlayPx = 500.0f;
-	const float howToPlayPy = 50.0f;
-	const int howToPlayNum = 1;
-
-	//CREDIT 
-	int creditImg = 0;
-	const float creditPx = 500.0f;
-	const float creditPy = 500.0f;
-	const int creditNum = 1;
+	//HowToPlay&CREDIT
+	int HowToPlayImg[3] = { 0 };
+	int CreditImg = 0;
+	const int TotalHowTo = 3;
+	const float HowToCreditPx = 500.0f;
+	const float HowToCreditPy = 50.0f;
 
 	//SIGNAL 
 	int signalImg = 0;
@@ -139,9 +141,16 @@ public:
 	const float scorePy = 0.0f;
 	const float timePx = 0.0f;
 	const float timePy = 75.0f;
+	const int timeCntNotice = 600;
+
+	const float easyTimes = 0.5f;
+	const float normalTimes = 1.0;
+	const float hardTimes = 1.5f;
+
 
 	//FALL_FRUIT&ITEM
 	const float fallRadius = 50.0f;//75
+	const float fallTopRadius = 50.0f;//75
 
 	//PLAYER
 	int playerImg = 0;

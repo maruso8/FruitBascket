@@ -12,50 +12,27 @@
 #include"SOUND_MANEGER.h"
 
 
-PROCESS* PROCESS::Proc=0;
 CONTAINER* PROCESS::C=0;
-FALL_MANEGER* PROCESS::FallManeger=0;
-TITLE_MANEGER* PROCESS::TitelManeger=0;
-SOUND_MANEGER* PROCESS::SoundManeger=0;
 
 PROCESS::PROCESS() {
 	C = CONTAINER::getInstance();
-	FallManeger = FALL_MANEGER::getInstans();
-	TitelManeger = TITLE_MANEGER::getInstans();
-	SoundManeger = SOUND_MANEGER::getInstans();
-
+	TitelManeger = new TITLE_MANEGER;
+	SoundManeger = new SOUND_MANEGER;
+	FallManeger = new FALL_MANEGER;
 	Player = new PLAYER;
 	check = new CHECK;
 	Fade = new FADE;
 }
 
 
-PROCESS* PROCESS::getInstans() {
-	if (!Proc) {
-		Proc = new PROCESS;
-	}
-	return Proc;
-}
-
-
-PROCESS* PROCESS::Delete() {
-	if (Proc) {
-		delete Proc;
-		Proc = 0;
-	}
-	return Proc;
-}
-
-
-
 PROCESS::~PROCESS() {
 	CONTAINER::Delete();
-	FALL_MANEGER::Delete();
-	TITLE_MANEGER::Delete();
-	SOUND_MANEGER::Delete();
+	delete TitelManeger;
+	delete SoundManeger;
 	delete Player;
 	delete check;
 	delete Fade;
+	delete FallManeger;
 }
 
 
@@ -91,14 +68,13 @@ int PROCESS::score(char Id, int score,int Level) {
 		else { SoundManeger->getRotFruitGetSE(); }
 
 
-		float num = 0;
-		if (Level == 0) { num = 0.5f; }
-		if (Level == 1) { num = 1.0f; }
-		if (Level == 2) { num = 1.5f; }
+		if (Level == 0) { LevelTimes = C->easyTimes; }
+		if (Level == 1) { LevelTimes = C->normalTimes; }
+		if (Level == 2) { LevelTimes = C->hardTimes; }
 
 		if (Id == 'm') {return -score / 2;}
 		if ('a' <= Id && Id <= 'd' || 'k' <= Id && Id <= 'l') {
-			return FallManeger->getScore(Id) * num;
+			return FallManeger->getScore(Id) * LevelTimes;
 		}
 		return FallManeger->getScore(Id);
 	}

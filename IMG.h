@@ -7,10 +7,11 @@ public:
 	IMG();
 	~IMG();
 	virtual void draw(float px = 0);
+	virtual void selectDraw(int select) {};
 	virtual void changeTitleImg() {};
 	virtual void changeGameImg() {};
 	virtual void drawRankScore(int score) {};
-	virtual void Leveldraw(float py) {};
+	virtual void Leveldraw(float py,int select) {};
 	void fadeIn();
 	void fadeOut();
 	float alpha();

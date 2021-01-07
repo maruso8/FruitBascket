@@ -23,28 +23,31 @@
 
 
 
-
 GAME::GAME() {
 	srand((unsigned int)time(NULL));
-	C = CONTAINER::getInstance();
-	C->LoadData("data/Data.txt");
-	TitelManeger = TITLE_MANEGER::getInstans();
-	SoundManeger = SOUND_MANEGER::getInstans();
-	ScoreManeger = SCORE_MANEGER::getInstans();
-	Proc = PROCESS::getInstans();
 
+
+	C = CONTAINER::getInstance();
+	C->LoadData("data/Data.dat");
+	TitelManeger = new TITLE_MANEGER;
+	Proc = new PROCESS;
+	SoundManeger = new SOUND_MANEGER;
+	ScoreManeger = new SCORE_MANEGER();
 	check = new CHECK;
 	TimeLimit = new TIME_LIMIT;
+
 	SoundManeger->getTitelBgm();
+
+	TitleScene = C->TitleScene;
+	TimeCntNotice = C->timeCntNotice;
 }
 
 GAME::~GAME() {
-	TITLE_MANEGER::Delete();
-	SCORE_MANEGER::Delete();
-	SOUND_MANEGER::Delete();
-	PROCESS::Delete();
 	CONTAINER::Delete();
-
+	delete TitelManeger;
+	delete Proc;
+	delete SoundManeger;
+	delete ScoreManeger;
 	delete check;
 	delete TimeLimit;
 }
@@ -74,7 +77,7 @@ void GAME::main() {
 					if (GameTitle == 0) {
 						check->check(GameCheck);
 						if (isTrigger(KEY_Z)) {
-							Title = GameCheck;
+							TitleScene = GameCheck;
 							SoundManeger->getDecisionSE();
 							GameTitle = GameCheck;
 							if (GameTitle == 0) { Proc->flagOn(); }
@@ -83,13 +86,13 @@ void GAME::main() {
 					}
 					if (GameTitle == 1) {
 						if (isTrigger(KEY_X)) {
-							Title = 5;
+							TitleScene = C->TitleScene;
 							SoundManeger->getDecisionSE();
 							Proc->flagOff();
 							GameTitle = 0;
 						}
 						//遊び方orクレジットの表示
-						Proc->gameSelect(Title);
+						Proc->gameSelect(TitleScene);
 					}
 				}
 			}
@@ -122,14 +125,13 @@ void GAME::main() {
 			//アップデート＆描画
 			ScoreManeger->scoredraw(PlayerScore);
 			//制限時間通知
-			if ((TimeCnt <= 600) && (TimwNotice == 0)) { TimwNotice = 1; SoundManeger->getTimwNotice(); }
-			else if ((TimeCnt >= 600) && (TimwNotice == 1)) { TimwNotice = 0; }
+			if ((TimeCnt <= TimeCntNotice) && (TimwNotice == 0)) { TimwNotice = 1; SoundManeger->getTimwNotice(); }
+			else if ((TimeCnt >= TimeCntNotice) && (TimwNotice == 1)) { TimwNotice = 0; }
 
 			if (TimeCnt <= 0) {
-				C->saveData(GameLevel,PlayerScore);
 				SoundManeger->stopBgm();
 				SoundManeger->getScoreBgm();
-				ScoreManeger->scoreRankInit();
+				ScoreManeger->scoreRankInit(GameLevel, PlayerScore);
 				GameStart = GAME_STATE_SCORE;
 			}
 		}
@@ -166,7 +168,8 @@ void GAME::main() {
 }
 
 bool GAME::end() {
-	if (Title == 3) {
+	if (TitleScene == 3) {
+		int i = 0;
 		return true;
 	}
 	return false;
@@ -194,8 +197,12 @@ int GAME::selectLevel() {
 
 
 void GAME::gameInit() {
-	TimeCnt = C->getIData("TimeCnt");
+	
+	int i = 0;
+	
 	PlayerScore = 0;
+	TimeCnt = C->getFData("TimeCnt");
+
 }
 
 void GAME::titelInit() {
@@ -203,9 +210,8 @@ void GAME::titelInit() {
 	SoundManeger->getTitelBgm();
 	TitelManeger->changeTitleImg();
 	Proc->deleteAlpha();
-	C->DeleteRank();
 	GameStart = GAME_STATE_TITEL;
 	GameTitle = 0;
 	GameLevel = GAME_LEVEL_NULL;
-	Title = 5;
+	TitleScene = C->TitleScene;
 }

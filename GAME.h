@@ -12,6 +12,7 @@ class SCORE_MANEGER;
 class PROCESS;
 class SOUND_MANEGER;
 
+
 class GAME {
 public:
 	GAME();
@@ -28,14 +29,14 @@ private:
 	int PlayerScore = 0;
 	char Id = 0;
 
-	int Title = 5;
+	int TitleScene = 0;
 	int GameTitle = 0;
 	int GameCheck = 0;
 	int GameLevelCheck = 0;
 
 	int TimeCnt = 0;
 	int TimwNotice = 0;
-
+	int TimeCntNotice = 0;
 
 
 	CONTAINER* C = 0;

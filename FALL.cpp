@@ -54,7 +54,7 @@ float FALL::alpha() { return Alpha; }
 
 
 void FALL::setImg(const char* name){
-	sprintf_s(Name, "%sImg.png", name);
+	sprintf_s(Name, "%s.png", name);
 	Img = C->getIData(Name);
 }
 void FALL::setId(const char* name){

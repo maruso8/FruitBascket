@@ -81,12 +81,6 @@
     <ClInclude Include="PLAYER.h">
       <Filter>CHARACTER</Filter>
     </ClInclude>
-    <ClInclude Include="HowToPlay.h">
-      <Filter>TITEL_IMG</Filter>
-    </ClInclude>
-    <ClInclude Include="CREDIT.h">
-      <Filter>TITEL_IMG</Filter>
-    </ClInclude>
     <ClInclude Include="IMG.h">
       <Filter>TITEL_IMG</Filter>
     </ClInclude>

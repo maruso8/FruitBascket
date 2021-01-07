@@ -1,33 +1,16 @@
+#include"CONTAINER.h"
 #include"IMG.h"
 #include"SCORE.h"
 #include"SCORE_RANK.h"
 #include"SCORE_MANEGER.h"
 
 
-SCORE_MANEGER* SCORE_MANEGER::ScoreManeger = 0;
+CONTAINER* SCORE_MANEGER::C = 0;
 
 SCORE_MANEGER::SCORE_MANEGER() {
+	C = CONTAINER::getInstance();
 	Score = new SCORE;
 	ScoreRank = new SCORE_RANK;
-
-}
-
-
-
-SCORE_MANEGER* SCORE_MANEGER::getInstans() {
-	if (!ScoreManeger) {
-		ScoreManeger = new SCORE_MANEGER;
-	}
-	return ScoreManeger;
-}
-
-SCORE_MANEGER* SCORE_MANEGER::Delete() {
-
-	if (ScoreManeger) {
-		delete ScoreManeger;
-		ScoreManeger = 0;
-	}
-	return ScoreManeger;
 }
 
 
@@ -46,7 +29,8 @@ void SCORE_MANEGER::drawScoreRank() {
 }
 
 
-void SCORE_MANEGER::scoreRankInit() {
+void SCORE_MANEGER::scoreRankInit(int GameLevel, int PlayerScore) {
+	C->saveData(GameLevel, PlayerScore);
 	ScoreRank->rankInit();
 }
 

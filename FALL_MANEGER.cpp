@@ -19,7 +19,6 @@
 
 
 CONTAINER* FALL_MANEGER::C = 0;
-FALL_MANEGER* FALL_MANEGER::FallManeger = 0;
 
 FALL_MANEGER::FALL_MANEGER() {
 
@@ -66,24 +65,6 @@ FALL_MANEGER::~FALL_MANEGER() {
 	delete[] AllFall;
 	CONTAINER::Delete();
 }
-
-
-
-FALL_MANEGER* FALL_MANEGER::getInstans() {
-	if (!FallManeger) {
-		FallManeger = new FALL_MANEGER;
-	}
-	return FallManeger;
-}
-
-FALL_MANEGER* FALL_MANEGER::Delete() {
-	if (FallManeger) {
-		delete FallManeger;
-		FallManeger = 0;
-	}
-	return FallManeger;
-}
-
 
 
 void FALL_MANEGER::appear(char Id) {

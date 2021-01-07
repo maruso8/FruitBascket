@@ -1,0 +1,90 @@
+14
+14
+59
+apple.png
+banana.png
+orange.png
+strawberry.png
+rotApple.png
+rotOrange.png
+clockUp.png
+clockDown.png
+shoesUp.png
+shoesDown.png
+tomato.png
+chestnut.png
+durian.png
+needle.png
+appleId a
+strawberryId b
+orangeId c
+bananaId d
+rotAppleId e
+rotOrangeId f
+clockUpId g
+clockDownId h
+shoesUpId i
+shoesDownId j
+tomatoId k
+chestnutId l
+durianId m
+needleId n
+TimeCnt 3600.000000
+fallCnt 10.000000
+fallRadius 50.000000
+Numapple 7.000000
+appleAdsSpeed 3.000000
+appleAlpha 0.000000
+appleScore 50.000000
+NumStrawberry 7.000000
+strawberryAdsSpeed 4.000000
+strawberryAlpha 0.000000
+strawberryScore 100.000000
+NumOrange 7.000000
+orangeAdsSpeed 5.000000
+orangeAlpha 0.000000
+orangeScore 200.000000
+NumBanana 7.000000
+bananaAdsSpeed 6.000000
+bananaAlpha 0.000000
+bananaScore 300.000000
+NumRotApple 7.000000
+rotAppleAdsSpeed 5.000000
+rotAppleAlpha 0.000000
+rotAppleScore -100.000000
+NumRotOrange 7.000000
+rotOrangeAdsSpeed 5.000000
+rotOrangeAlpha 0.000000
+rotOrangeScore -200.000000
+NumClockUp 3.000000
+clockUpAdsSpeed 5.000000
+clockUpAlpha 0.000000
+clockUpScore 0.000000
+NumClockDown 3.000000
+clockDownAdsSpeed 5.000000
+clockDownAlpha 0.000000
+clockDownScore 0.000000
+NumShoesUp 3.000000
+shoesUpAdsSpeed 5.000000
+shoesUpAlpha 0.000000
+shoesUpScore 0.000000
+NumShoesDown 3.000000
+shoesDownAdsSpeed 5.000000
+shoesDownAlpha 0.000000
+shoesDownScore 0.000000
+NumTomato 7.000000
+tomatoAdsSpeed 3.000000
+tomatoAlpha 0.000000
+tomatoScore 0.000000
+NumChestnut 7.000000
+chestnutAdsSpeed 4.000000
+chestnutAlpha 0.000000
+chestnutScore 50.000000
+NumDurian 5.000000
+durianAdsSpeed 5.000000
+durianAlpha 0.000000
+durianScore 0.000000
+NumNeedle 5.000000
+needleAdsSpeed 0.000000
+needleAlpha 0.000000
+needleScore 0.000000

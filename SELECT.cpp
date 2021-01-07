@@ -12,13 +12,20 @@ SELECT::SELECT() {
 	Img = C->selectFleamImg;
 	Px = C->selectPx;
 	Py = C->selectPy;
-	Alpha = 0.5;
+	Alpha = 1;
 }
 
-void SELECT::draw(float px) {
+void SELECT::selectDraw(int select) {
+	
+	
 	for (int i = 0; i < C->TotalSelect; i++) {
-		drawImage(Img, Px, Py + (SelectHeight * i), COLOR(Rad, Green, Blue, Alpha));
+		if (select == i) {
+			drawImage(Img, Px, Py + (SelectHeight * i), COLOR(Rad, Green, Blue, Alpha));
+
+		}
+		else drawImage(Img, Px, Py + (SelectHeight * i), COLOR(Rad, Green, Blue, Alpha / 2));
 		drawImage(SelectImg[i], Px, Py + (SelectHeight * i));
 	}
+	
 }
 

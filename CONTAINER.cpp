@@ -13,10 +13,10 @@
 
 CONTAINER* CONTAINER::C = 0;
 
-
 CONTAINER::CONTAINER() {
+
 	//タイトルと画面の大きさ
-	initialize("体験ばーん", windowWidht, windowHeight, FULLSCREEN);
+	initialize("体験ばーん", windowWidht,windowHeight, FULLSCREEN);
 	//画像ロード-------------------------------------------------------------
 	//タイトル画像ロード
 	backGroundImg = loadImage("タイトル画面.png");
@@ -30,9 +30,15 @@ CONTAINER::CONTAINER() {
 		selectLevelImg[i] = loadImage(selectName);
 	}
 	selectFleamImg = loadImage("タイトルうふふ.png");
-	howToPlayImg = loadImage("遊び方の枠背景new.png");
-	creditImg = loadImage("S.jpg");
+	levelSelectFleamImg = loadImage("レベル選択枠.png");
 	signalImg = loadImage("矢印.png");
+
+	for (int i = 0; i < TotalHowTo; i++) {
+		sprintf_s(selectName, "%s_%d.png", "遊び方", i);
+		HowToPlayImg[i] = loadImage(selectName);
+	}
+	CreditImg = loadImage("クレジット.png");
+
 
 	fadeinImg = loadImage("フェードイン.png");
 	freamImg = loadImage("遊び方の枠背景.png");
@@ -59,6 +65,12 @@ CONTAINER::CONTAINER() {
 		rankNumImg[i] = loadImage(name);
 	}
 
+
+
+	rank = new RANK[TotalRankNum];
+
+
+
 }
 
 CONTAINER* CONTAINER::getInstance() {
@@ -84,7 +96,8 @@ CONTAINER* CONTAINER::Delete() {
 
 int CONTAINER::LoadData(const char* filename) {
 	FILE* fp = 0;
-	fopen_s(&fp,filename, "r");
+	fopen_s(&fp, filename, "rb");
+
 
 	//fpが存在しないときは偽を返してここで停止して注意が出る。#include<cassert>で使えるようになる。
 	assert(fp != 0);
@@ -98,13 +111,15 @@ int CONTAINER::LoadData(const char* filename) {
 	Data = new DATA[DataNum[2]];
 	
 
+	int i = 0;
+
 
 	//読み込み開始-----------------------------------------------------------------------------------------------
 	//画像の読み込み
 	char name[256];
 	int Img = 0;
 	for (int i = 0; i < DataNum[0]; i++) {
-		fscanf_s(fp, "%s %d", name, 256, &Img);
+		fscanf_s(fp, "%s", name, 256);
 		ImgData[i].setName(name);
 		ImgData[i].setImg(name);
 	}
@@ -197,7 +212,6 @@ char CONTAINER::getCData(const char* name) {
 
 int CONTAINER::saveData(int Level, int score) {
 
-	rank = new RANK[TotalRankNum];
 
 
 	FILE* fp;
@@ -228,12 +242,4 @@ int CONTAINER::saveData(int Level, int score) {
 	fclose(fp);
 
 	return 0;
-}
-
-void CONTAINER::DeleteRank() {
-	if (rank) {
-		//new data*[num]のようにnewを*(ポインタ)で作ってないのでdelete[]でOK。 
-		delete[] rank;
-		rank = 0;
-	}
 }

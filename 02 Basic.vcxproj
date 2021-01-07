@@ -197,7 +197,6 @@
     <ClInclude Include="CHARACTER.h" />
     <ClInclude Include="CHECK.h" />
     <ClInclude Include="CONTAINER.h" />
-    <ClInclude Include="CREDIT.h" />
     <ClInclude Include="DATA.h" />
     <ClInclude Include="FADE.h" />
     <ClInclude Include="FALL.h" />
@@ -224,7 +223,6 @@
     <ClInclude Include="SCORE_MANEGER.h" />
     <ClInclude Include="SELECT.h" />
     <ClInclude Include="PLAYER.h" />
-    <ClInclude Include="HowToPlay.h" />
     <ClInclude Include="IMG.h" />
     <ClInclude Include="SIGNAL.h" />
     <ClInclude Include="SOUND_MANEGER.h" />

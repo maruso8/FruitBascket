@@ -5,7 +5,7 @@
 
 
 SCORE_RANK::SCORE_RANK() {
-	SoundManeger = SOUND_MANEGER::getInstans();
+	SoundManeger = new SOUND_MANEGER;
 
 	FreamImg = C->scoreFreamImg;
 	FreamPx = C->freamPx;
@@ -34,7 +34,7 @@ SCORE_RANK::SCORE_RANK() {
 }
 
 SCORE_RANK::~SCORE_RANK() {
-	SOUND_MANEGER::Delete();
+	delete SoundManeger;
 }
 
 
@@ -107,30 +107,6 @@ bool SCORE_RANK::drawRankScore(int Level, int score) {
 			place /= 10;
 		}
 	}
-
-
-
-	/*
-		for (int i = 0; i < rankNum; i++) {
-			place = 10000;
-			num = 0;
-
-			for (int j = 0; j < 5; j++) {
-				if (C->rank[Level].RankScore[i]< 0) {
-					C->rank[Level].RankScore[i]= 0;
-				}
-				num = C->rank[Level].RankScore[i]/ place;
-				C->rank[Level].RankScore[i]%= place;
-				if (num == 0 && place > 1000) {
-					place /= 10;
-					continue;
-				}
-				drawImage(ScoreNumImg[num], RankPx + 75 * j, RankPy + (i * ScoreSpace));
-				place /= 10;
-			}
-		}
-		*/
-
 
 	if (rankNum==RankNum) { return true; }
 	return false;

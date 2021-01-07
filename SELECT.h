@@ -7,7 +7,7 @@ class SELECT : public IMG {
 public:
 	SELECT();
 
-	void draw(float px = 0);
+	void selectDraw(int select);
 
 
 private:

@@ -2,20 +2,20 @@
 14
 55
 
-appleImg.png 0
-bananaImg.png 0
-orangeImg.png 0
-strawberryImg.png 0
-rotAppleImg.png 0
-rotOrangeImg.png 0
-clockUpImg.png 0
-clockDownImg.png 0
-shoesUpImg.png 0
-shoesDownImg.png 0
-tomatoImg.png 0
-chestnutImg.png 0
-durianImg.png 0
-needleImg.png 0
+apple.png
+banana.png
+orange.png
+strawberry.png
+rotApple.png
+rotOrange.png
+clockUp.png
+clockDown.png
+shoesUp.png
+shoesDown.png
+tomato.png
+chestnut.png
+durian.png
+needle.png
 
 appleId a
 strawberryId b
