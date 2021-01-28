@@ -14,6 +14,8 @@ public:
 	virtual void Leveldraw(float py,int select) {};
 	void fadeIn();
 	void fadeOut();
+	void translucentIn();
+	void translucentOut();
 	float alpha();
 	virtual float selectHeight();
 

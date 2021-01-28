@@ -120,7 +120,7 @@ void GAME::main() {
 			//当たり判定
 			Id = Proc->collision();
 			//ここでスコアチェック
-			PlayerScore += Proc->score(Id, PlayerScore,GameLevel);
+			PlayerScore += Proc->score(Id, PlayerScore, GameLevel);
 			TimeCnt += Proc->item(Id);
 			TimeCnt--;
 			//アップデート＆描画
@@ -146,21 +146,23 @@ void GAME::main() {
 
 		Proc->scoredraw();
 		//ランキングを稼働させる
-		;
-		if (ScoreManeger->scoreRankDraw(GameLevel, PlayerScore)) {
-			if (Proc->flag()) {
-				//Zキーを押すとタイトルに戻る
-				if (isTrigger(KEY_Z)) {
-					Proc->flagOff();
+		if (Proc->translucentOut()) {
+			if (ScoreManeger->scoreRankDraw(GameLevel, PlayerScore)) {
+				if (Proc->flag()) {
+					//Zキーを押すとタイトルに戻る
+					if (isTrigger(KEY_Z)) {
+						Proc->flagOff();
+					}
+				}
+				else {
+					if (Proc->Fadeout()) {
+						titelInit();
+					}
 				}
 			}
-			else {
-				if (Proc->Fadeout()) {
-					titelInit();
-				}
-			}
+			if (isTrigger(KEY_Z)) { ScoreManeger->skip(); }
 		}
-		if (isTrigger(KEY_Z)) { ScoreManeger->skip(); }
+
 		break;
 	}
 

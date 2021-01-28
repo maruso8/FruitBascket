@@ -38,8 +38,8 @@ bool SCORE_MANEGER::scoreRankDraw(int Level, int score) {
 	ScoreRank->draw();
 	if (ScoreRank->drawRankScore(Level, score)) { return true; }
 	else { return false; }
-
 }
+
 void SCORE_MANEGER::skip() {
 	ScoreRank->skipRankDraw();
 }

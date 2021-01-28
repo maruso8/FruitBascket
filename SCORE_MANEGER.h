@@ -1,6 +1,6 @@
 #pragma once
 
-class IMG;
+class FADE;
 class SCORE;
 class SCORE_MANEGER;
 class CONTAINER;
@@ -22,7 +22,7 @@ private:
 	static CONTAINER* C;
 	SCORE* Score = 0;
 	SCORE_RANK* ScoreRank = 0;
-
+	FADE* Fade = 0;
 
 
 };

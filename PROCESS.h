@@ -25,6 +25,8 @@ public:
 	void scoredraw();
 	bool FadeIn();
 	bool Fadeout();
+	bool translucentIn();
+	bool translucentOut();
 
 	void flagOn();
 	void flagOff();

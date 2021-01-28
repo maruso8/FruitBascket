@@ -29,4 +29,8 @@ float IMG::selectHeight() {
 void IMG::fadeIn() { Alpha -= C->fadeDecayAlpha; if (Alpha < 0.0f) { Alpha = 0.0f; } };
 void IMG::fadeOut() { Alpha += C->fadeDecayAlpha; if (Alpha > 1.0f) { Alpha = 1.0f; } };
 
+void IMG::translucentIn() { Alpha -= C->fadeDecayAlpha; if (Alpha < 0.0f) { Alpha = 0.0f; } };
+void IMG::translucentOut() { Alpha += C->fadeDecayAlpha; if (Alpha > 0.5f) { Alpha = 0.5f; } };
+
+
 float IMG::alpha() { return Alpha; };

@@ -195,6 +195,29 @@ bool PROCESS::Fadeout() {
 		return false;
 	}
 }
+bool PROCESS::translucentIn() {
+	Fade->draw();
+
+	if (Fade->alpha() <= 0) {
+		return true;
+	}
+	else {
+		Fade->translucentIn();
+		return false;
+	}
+
+}
+bool PROCESS::translucentOut() {
+	Fade->draw();
+
+	if (Fade->alpha() >= 0.5f) {
+		return true;
+	}
+	else {
+		Fade->translucentOut();
+		return false;
+	}
+}
 
 
 void PROCESS::flagOn() { Flag = 1; }
