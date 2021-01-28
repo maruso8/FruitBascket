@@ -44,19 +44,12 @@ struct CONTAINER {
 
 	//ç\ë¢ëÃ--------------------------------------------------------------------
 
-
-
 	RANK* rank = 0;
-
-
-
 
 private:
 	class DATA* Data = 0;
 	class ID_DATA* IdData = 0;
 	class IMG_DATA* ImgData = 0;
-
-	int DataNum[3] = { 0 };
 
 	int TotalRankNum = 3;
 
@@ -88,6 +81,7 @@ public:
 	//TITLE
 	int titleImg = 0;
 	const float titlePx = 1120.0f;
+	const float TitleScroll = 800;
 	const float titlePy = 0.0f;
 	const int titleNum = 1;
 	const int TitleScene = 5;
@@ -180,6 +174,27 @@ public:
 	const float scoreSpace = 200.0f;
 	const float PlayerScorePx = 750.0f;
 	const float PlayerScorePy = 850.0f;
+
+
+	//Furuit & Itemä÷òA-------------------------------------------------
+	//datÇì¸ÇÍÇÈópÇÃstruct
+	struct FALL_DATA {
+
+			int NumImgData;
+			int NumIdData;
+			int NumData;
+			//ImgName
+			std::string ImgName[14];
+			//Id
+			std::string IdName[14];
+			char Id[14];
+			//GameData
+			std::string FallDataName[59];
+			float FallData[59];
+
+	};
+
+	FALL_DATA FallData;
 
 
 };

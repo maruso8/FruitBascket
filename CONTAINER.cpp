@@ -16,7 +16,7 @@ CONTAINER* CONTAINER::C = 0;
 CONTAINER::CONTAINER() {
 
 	//タイトルと画面の大きさ
-	initialize("体験ばーん", windowWidht,windowHeight, FULLSCREEN);
+	initialize("FuruitBascket", windowWidht,windowHeight, FULLSCREEN);
 	//画像ロード-------------------------------------------------------------
 	//タイトル画像ロード
 	backGroundImg = loadImage("タイトル画面.png");
@@ -59,10 +59,10 @@ CONTAINER::CONTAINER() {
 
 	//スコア画面ロード
 	scoreFreamImg = loadImage("ランキング枠.png");
-	char name[256] = { 0 };
+	char Scorename[256] = { 0 };
 	for (int i = 0; i < 3; i++) {
-		sprintf_s(name, "%d位枠.png", i+1);
-		rankNumImg[i] = loadImage(name);
+		sprintf_s(Scorename, "%d位枠.png", i+1);
+		rankNumImg[i] = loadImage(Scorename);
 	}
 
 
@@ -89,59 +89,54 @@ CONTAINER* CONTAINER::Delete() {
 		delete C;
 		C = 0;
 	}
+
 	return C;
 }
 
 
 
 int CONTAINER::LoadData(const char* filename) {
-	FILE* fp = 0;
-	fopen_s(&fp, filename, "rb");
 
+
+	FILE* fp = 0;	
+	
+	
+	fopen_s(&fp, "data/Data.bin", "rb");
 
 	//fpが存在しないときは偽を返してここで停止して注意が出る。#include<cassert>で使えるようになる。
 	assert(fp != 0);
-	//Dataファイルの最初はImg、Id、Dataの数でなければならない
-	for (int i = 0; i < 3; i++) {
-		fscanf_s(fp, "%d", &DataNum[i]);
-	}
+
+	//datにあるデータをFallDataに入れる
+	fread(&FallData, sizeof(FALL_DATA), 1, fp);
+	fclose(fp);
+
+
+
 	//scanしたNumData分のDetaをそれぞれ確保
-	ImgData = new IMG_DATA[DataNum[0]];
-	IdData = new ID_DATA[DataNum[1]];
-	Data = new DATA[DataNum[2]];
-	
-
-	int i = 0;
-
+	ImgData = new IMG_DATA[FallData.NumImgData];
+	IdData = new ID_DATA[FallData.NumIdData];
+	Data = new DATA[FallData.NumData];
 
 	//読み込み開始-----------------------------------------------------------------------------------------------
 	//画像の読み込み
-	char name[256];
-	int Img = 0;
-	for (int i = 0; i < DataNum[0]; i++) {
-		fscanf_s(fp, "%s", name, 256);
-		ImgData[i].setName(name);
-		ImgData[i].setImg(name);
+	for (int i = 0; i < FallData.NumImgData; i++) {
+		ImgData[i].setName(FallData.ImgName[i].c_str());
+		ImgData[i].setImg(FallData.ImgName[i].c_str());
 	}
 
 	//Idの読み込み
-	char Id;
-	for (int i = 0; i < DataNum[1]; i++) {
-		fscanf_s(fp, "%s %c", name, 256, &Id);
-		IdData[i].setName(name);
-		IdData[i].setId(Id);
+	for (int i = 0; i < FallData.NumIdData; i++) {
+		IdData[i].setName(FallData.IdName[i].c_str());
+		IdData[i].setId(FallData.Id[i]);
 	}
 
-	float value;
-	for (int i = 0; i < DataNum[2]; i++) {
-		//全てfloat値で読み込む。文字列をもらう場合は文字列の最大数を指定する。超えたら受け取らない(スキップする)
-		//fscan_fは対象の使用回数＝段落となっている。つまりscanfすると一列全てscanfする。
-		fscanf_s(fp, "%s %f", name, 256, &value);
-		Data[i].setName(name);
-		Data[i].setValue(value);
+	//Dataの読み込み
+	for (int i = 0; i < FallData.NumData; i++) {
+
+		Data[i].setName(FallData.FallDataName[i].c_str());
+		Data[i].setValue(FallData.FallData[i]);
 	}
 
-	fclose(fp);
 
 	return 0;
 }
@@ -172,41 +167,50 @@ CONTAINER::~CONTAINER() {
 }
 
 int CONTAINER::getIData(const char* name) {
+
+
+
 	int i = 0;
-	for (i = 0; i < DataNum[0]; i++) {
+	for (i = 0; i < FallData.NumImgData; i++) {
 		if (ImgData[i].name() == name) {
 			return (int)ImgData[i].img();
 		}
 	}
-	for (i = 0; i < DataNum[2]; i++) {
+	for (i = 0; i < FallData.NumData; i++) {
 		if (Data[i].name() == name) {
 			return (int)Data[i].value();
 		}
 	}
-	assert(i < DataNum[2]);
+	assert(i < FallData.NumData);
 	return 0;
 }
 
 
 float CONTAINER::getFData(const char* name) {
+
+
+
 	int i = 0;
-	for (i = 0; i < DataNum[2]; i++) {
+	for (i = 0; i < FallData.NumData; i++) {
 		if (Data[i].name() == name) {
 			return Data[i].value();
 		}
 	}
-	assert(i < DataNum[2]);
+	assert(i < FallData.NumData);
 	return 0;
 }
 
 char CONTAINER::getCData(const char* name) {
+
+
+
 	int i = 0;
-	for (i = 0; i < DataNum[1]; i++) {
+	for (i = 0; i < FallData.NumIdData; i++) {
 		if (IdData[i].name() == name) {
 			return IdData[i].id();
 		}
 	}
-	assert(i < DataNum[1]);
+	assert(i < FallData.NumIdData);
 	return 0;
 }
 
@@ -242,4 +246,5 @@ int CONTAINER::saveData(int Level, int score) {
 	fclose(fp);
 
 	return 0;
+
 }

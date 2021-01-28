@@ -27,15 +27,15 @@ FALL_MANEGER::FALL_MANEGER() {
 	Total += C->getIData("Numapple");
 	Total += C->getIData("NumBanana");
 	Total += C->getIData("NumOrange");
-	Total += C->getIData("NumStrawberry");
-	Total += C->getIData("NumRotApple");
-	Total += C->getIData("NumRotOrange");
+	Total += C->getIData("NumBerry");
+	Total += C->getIData("NumRApple");
+	Total += C->getIData("NumROrange");
 	Total += C->getIData("NumClockUp");
 	Total += C->getIData("NumShoesUp");
-	Total += C->getIData("NumClockDown");
-	Total += C->getIData("NumShoesDown");
+	Total += C->getIData("NumClockDn");
+	Total += C->getIData("NumShoesDn");
 	Total += C->getIData("NumTomato");
-	Total += C->getIData("NumChestnut");
+	Total += C->getIData("NumChest");
 	Total += C->getIData("NumDurian");
 	Total += C->getIData("NumNeedle");
 
@@ -44,15 +44,15 @@ FALL_MANEGER::FALL_MANEGER() {
 	for (i = 0; i < C->getIData("Numapple"); i++) { AllFall[j++] = new APPLE("apple"); }
 	for (i = 0; i < C->getIData("NumBanana"); i++) { AllFall[j++] = new BANANA("banana"); }
 	for (i = 0; i < C->getIData("NumOrange"); i++) { AllFall[j++] = new ORANGE("orange"); }
-	for (i = 0; i < C->getIData("NumStrawberry"); i++) { AllFall[j++] = new STRAWBERRY("strawberry"); }
-	for (i = 0; i < C->getIData("NumRotApple"); i++) { AllFall[j++] = new ROT_APPLE("rotApple"); }
-	for (i = 0; i < C->getIData("NumRotOrange"); i++) { AllFall[j++] = new ROT_ORANGE("rotOrange"); }
+	for (i = 0; i < C->getIData("NumBerry"); i++) { AllFall[j++] = new STRAWBERRY("berry"); }
+	for (i = 0; i < C->getIData("NumRApple"); i++) { AllFall[j++] = new ROT_APPLE("rApple"); }
+	for (i = 0; i < C->getIData("NumROrange"); i++) { AllFall[j++] = new ROT_ORANGE("rOrange"); }
 	for (i = 0; i < C->getIData("NumClockUp"); i++) { AllFall[j++] = new CLOCK_UP("clockUp"); }
 	for (i = 0; i < C->getIData("NumShoesUp"); i++) { AllFall[j++] = new SHOES_UP("shoesUp"); }
-	for (i = 0; i < C->getIData("NumClockDown"); i++) { AllFall[j++] = new CLOCK_DOWN("clockDown"); }
-	for (i = 0; i < C->getIData("NumShoesDown"); i++) { AllFall[j++] = new SHOES_DOWN("shoesDown"); }
+	for (i = 0; i < C->getIData("NumClockDn"); i++) { AllFall[j++] = new CLOCK_DOWN("clockDn"); }
+	for (i = 0; i < C->getIData("NumShoesDn"); i++) { AllFall[j++] = new SHOES_DOWN("shoesDn"); }
 	for (i = 0; i < C->getIData("NumTomato"); i++) { AllFall[j++] = new TOMATO("tomato"); }
-	for (i = 0; i < C->getIData("NumChestnut"); i++) { AllFall[j++] = new CHESTNUT("chestnut"); }
+	for (i = 0; i < C->getIData("NumChest"); i++) { AllFall[j++] = new CHESTNUT("chest"); }
 	for (i = 0; i < C->getIData("NumDurian"); i++) { AllFall[j++] = new DURIAN("durian"); }
 	for (i = 0; i < C->getIData("NumNeedle"); i++) { AllFall[j++] = new NEEDLE("needle"); }
 

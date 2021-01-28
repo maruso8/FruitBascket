@@ -37,17 +37,21 @@ void TITLE_MANEGER::backGround_Draw() {BackGround->draw();}
 void TITLE_MANEGER::title_Draw(int gameCheck) {
 	Title->draw();
 	Select->selectDraw(gameCheck);
-	//Select->draw();
-
-	for (int i = 0; i < 4; i++) {
-		if (gameCheck == i) {
-			if (gameCheck != SE) {
-				SE = gameCheck;
-				SoundManeger->getSelectSE();
+	//タイトル演出用
+	if (Time == 60) {
+		for (int i = 0; i < 4; i++) {
+			if (gameCheck == i) {
+				if (gameCheck != SE) {
+					SE = gameCheck;
+					SoundManeger->getSelectSE();
+				}
+				Signal->draw(i * Select->selectHeight());
 			}
-			Signal->draw(i * Select->selectHeight());
 		}
+
+
 	}
+	else { Time++; }
 }
 
 void TITLE_MANEGER::Level_Draw(int LevelCheck) {

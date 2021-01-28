@@ -21,6 +21,7 @@
 #include"SOUND_MANEGER.h"
 #include"SCORE_MANEGER.h"
 
+#include"new.h"
 
 
 GAME::GAME() {

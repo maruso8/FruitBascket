@@ -14,5 +14,7 @@ private:
 	int SelectImg[4] = {0,0,0,0};
 	int TotalSelect = 0;
 
+	int Time = 0;
+
 };
 

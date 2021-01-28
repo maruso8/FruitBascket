@@ -116,10 +116,9 @@ void  PROCESS::fallFruit(int time, int score, int Level) {
 		}
 
 		FallFruitCnt = rand() % 10 + (time / 239 + 1) + 30;
-
-
 		FallLotFruitCnt++;
-		if (FallLotFruitCnt > rand() % 2 + 1 && Level != 0) {
+
+		if (FallLotFruitCnt >rand() % 2 + 1 && Level != 0) {
 			if (score >= 5000 && Level == 2) { Id = check->lotFruitIdCheck(rand() % 3); }
 			else { Id = check->lotFruitIdCheck(rand() % 2); }
 			FallManeger->appear(Id);

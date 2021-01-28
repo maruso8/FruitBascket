@@ -28,6 +28,10 @@ private:
 
 	int SE = 0;
 
+	int Time = 0;
+
+
+
 	int Img = 0;
 	float Px = 0;
 	float Py = 0;
