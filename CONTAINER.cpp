@@ -19,53 +19,53 @@ CONTAINER::CONTAINER() {
 	initialize("FuruitBascket", windowWidht,windowHeight, FULLSCREEN);
 	//画像ロード-------------------------------------------------------------
 	//タイトル画像ロード
-	backGroundImg = loadImage("タイトル画面.png");
-	titleImg = loadImage("タイトル.png");
+
+	//loadImageFromResは先生が作ったものです。
+
+	backGroundImg = loadImageFromRes("TitelBack");
+	titleImg = loadImageFromRes("Titel");
 	for (int i = 0; i < TotalSelect; i++) {
-		sprintf_s(selectName, "%s_%d.png", "aka", i);
-		selectImg[i] = loadImage(selectName);
+		sprintf_s(selectName, "%s_%d", "Select", i);
+		selectImg[i] = loadImageFromRes(selectName);
 	}
 	for (int i = 0; i < 3; i++) {
-		sprintf_s(selectName, "%s_%d.png", "Lv", i);
-		selectLevelImg[i] = loadImage(selectName);
+		sprintf_s(selectName, "%s_%d", "Lv", i);
+		selectLevelImg[i] = loadImageFromRes(selectName);
 	}
-	selectFleamImg = loadImage("タイトルうふふ.png");
-	levelSelectFleamImg = loadImage("レベル選択枠.png");
-	signalImg = loadImage("矢印.png");
+	selectFleamImg = loadImageFromRes("SelectBack");
+	levelSelectFleamImg = loadImageFromRes("LevelBack");
+	signalImg = loadImageFromRes("Arrow");
 
 	for (int i = 0; i < TotalHowTo; i++) {
-		sprintf_s(selectName, "%s_%d.png", "遊び方", i);
-		HowToPlayImg[i] = loadImage(selectName);
+		sprintf_s(selectName, "%s_%d", "HowTo", i);
+		HowToPlayImg[i] = loadImageFromRes(selectName);
 	}
-	CreditImg = loadImage("クレジット.png");
+	CreditImg = loadImageFromRes("Credit");
 
 
-	fadeinImg = loadImage("フェードイン.png");
-	freamImg = loadImage("遊び方の枠背景.png");
+	fadeinImg = loadImageFromRes("Fade");
+	freamImg = loadImageFromRes("HowToBack");
 
 	//ゲームメイン画像ロード
-	gameBackGroundImg = loadImage("ゲーム背景.png");
-	playerImg = loadImage("プレイヤー.png");
-	playerRImg = loadImage("プレイヤーL.png");
-	playerLImg = loadImage("プレイヤーR.png");
+	gameBackGroundImg = loadImageFromRes("GameBack");
+	playerImg = loadImageFromRes("Player");
+	playerRImg = loadImageFromRes("PlayerL");
+	playerLImg = loadImageFromRes("PlayerR");
 
 
 	//スコア画像ロード
-	scoreImg = loadImage("sukoa.png");
-	int AllNumImg = loadImage("suuzi.png");
+	scoreImg = loadImageFromRes("Score");
+	int AllNumImg = loadImageFromRes("Number");
 	for (int i = 0; i < 10; i++) {
 		scoreNumImg[i] = divideImage(AllNumImg, 75 * i, 0, 75, 75);
 	}
 
 	//スコア画面ロード
-	scoreFreamImg = loadImage("ランキング枠.png");
-	char Scorename[256] = { 0 };
+	scoreFreamImg = loadImageFromRes("ScoreBack");
 	for (int i = 0; i < 3; i++) {
-		sprintf_s(Scorename, "%d位枠.png", i+1);
-		rankNumImg[i] = loadImage(Scorename);
+		sprintf_s(selectName, "No.%d", i);
+		rankNumImg[i] = loadImageFromRes(selectName);
 	}
-
-
 
 	rank = new RANK[TotalRankNum];
 
@@ -168,14 +168,7 @@ CONTAINER::~CONTAINER() {
 
 int CONTAINER::getIData(const char* name) {
 
-
-
 	int i = 0;
-	for (i = 0; i < FallData.NumImgData; i++) {
-		if (ImgData[i].name() == name) {
-			return (int)ImgData[i].img();
-		}
-	}
 	for (i = 0; i < FallData.NumData; i++) {
 		if (Data[i].name() == name) {
 			return (int)Data[i].value();

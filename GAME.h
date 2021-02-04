@@ -34,6 +34,7 @@ private:
 	int GameCheck = 0;
 	int GameLevelCheck = 0;
 
+	int DirectionTime = 0;
 	int TimeCnt = 0;
 	int TimwNotice = 0;
 	int TimeCntNotice = 0;

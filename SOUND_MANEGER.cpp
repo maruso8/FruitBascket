@@ -4,8 +4,12 @@
 
 
 SOUND_MANEGER::SOUND_MANEGER() {
+	
+	
+
 	TitelBgm = loadSound("タイトルBGM.wav");
-	GameBgm = loadSound("ゲームプレイBGM.wav");
+	GameBgm = loadSound("GamePlayBGM.wav");
+
 	ScoreBgm = loadSound("スコア画面BGM.wav");
 	//決定と選択音
 	SelectSE = loadSound("選択 ver2.wav");

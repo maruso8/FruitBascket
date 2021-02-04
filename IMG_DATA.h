@@ -8,13 +8,13 @@ class IMG_DATA {
 	//データの名前 std::stringはなんか便利なcharとでも思っておこう
 	std::string Name;
 	//画像番号　imgのために追加
-	int Img = 0;
+	std::string Img;
 public:
 	//セッター
 	void setName(const char* name);
 	void setImg(const char* name);
 	//ゲッター
 	std::string name();
-	int img();
+	std::string img();
 
 };

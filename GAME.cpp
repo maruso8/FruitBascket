@@ -61,50 +61,52 @@ void GAME::main() {
 	switch (GameStart) {
 	case GAME_STATE_TITEL:
 		TitelManeger->title_Draw(GameCheck);
-
-
-		if (GameLevel == GAME_LEVEL_NULL) {
-			if (Proc->FadeIn()) {
-				//ここでタイトル関連の処理を行う
-				if (Proc->flag()) {
-					selectLevel();
-					TitelManeger->Level_Draw(GameLevelCheck);
-					if (isTrigger(KEY_X)) {
-						SoundManeger->getDecisionSE();
-						Proc->flagOff();
-					}
-				}
-				else {
-					if (GameTitle == 0) {
-						check->check(GameCheck);
-						if (isTrigger(KEY_Z)) {
-							TitleScene = GameCheck;
-							SoundManeger->getDecisionSE();
-							GameTitle = GameCheck;
-							if (GameTitle == 0) { Proc->flagOn(); }
-							else { GameTitle = 1; }
-						}
-					}
-					if (GameTitle == 1) {
+		//演出用のif
+		if (DirectionTime >= 60) {
+			if (GameLevel == GAME_LEVEL_NULL) {
+				if (Proc->FadeIn()) {
+					//ここでタイトル関連の処理を行う
+					if (Proc->flag()) {
+						selectLevel();
+						TitelManeger->Level_Draw(GameLevelCheck);
 						if (isTrigger(KEY_X)) {
-							TitleScene = C->TitleScene;
 							SoundManeger->getDecisionSE();
 							Proc->flagOff();
-							GameTitle = 0;
 						}
-						//遊び方orクレジットの表示
-						Proc->gameSelect(TitleScene);
+					}
+					else {
+						if (GameTitle == 0) {
+							check->check(GameCheck);
+							if (isTrigger(KEY_Z)) {
+								TitleScene = GameCheck;
+								SoundManeger->getDecisionSE();
+								GameTitle = GameCheck;
+								if (GameTitle == 0) { Proc->flagOn(); }
+								else { GameTitle = 1; }
+							}
+						}
+						if (GameTitle == 1) {
+							if (isTrigger(KEY_X)) {
+								TitleScene = C->TitleScene;
+								SoundManeger->getDecisionSE();
+								Proc->flagOff();
+								GameTitle = 0;
+							}
+							//遊び方orクレジットの表示
+							Proc->gameSelect(TitleScene);
+						}
 					}
 				}
 			}
+			else if (Proc->Fadeout()) {
+				gameInit();
+				TitelManeger->changeGameImg();
+				SoundManeger->stopBgm();
+				SoundManeger->getGameBgm();
+				GameStart = GAME_STATE_PLAY;
+			}
 		}
-		else if (Proc->Fadeout()) {
-			gameInit();
-			TitelManeger->changeGameImg();
-			SoundManeger->stopBgm();
-			SoundManeger->getGameBgm();
-			GameStart = GAME_STATE_PLAY;
-		}
+		else DirectionTime++;
 
 		break;
 

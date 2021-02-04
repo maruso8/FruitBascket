@@ -8,9 +8,9 @@ void IMG_DATA::setName(const char* name){
 }
 
 void IMG_DATA::setImg(const char* name) {
-	Img = loadImage(name);
+	Img = name;
 }
 
 
 std::string IMG_DATA::name() { return Name; }
-int IMG_DATA::img() { return Img; }
+std::string IMG_DATA::img() { return Img; }

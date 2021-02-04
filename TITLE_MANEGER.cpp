@@ -66,8 +66,16 @@ void TITLE_MANEGER::changeGameImg() { BackGround->changeGameImg(); }
 bool TITLE_MANEGER::howToPlay() {
 	Img = C->HowToPlayImg[HowToPage];
 	drawImage(Img, Px, Py);
-	if (isTrigger(KEY_LEFT)) { HowToPage--; if (HowToPage < 0) { HowToPage = 0; } }
-	if (isTrigger(KEY_RIGHT)) { HowToPage++; if (HowToPage > 2) { HowToPage = 2; } }
+	if (isTrigger(KEY_LEFT)) {
+		HowToPage--;
+		SoundManeger->getSelectSE();
+		if (HowToPage < 0) { HowToPage = 0; }
+	}
+	if (isTrigger(KEY_RIGHT)) {
+		HowToPage++;
+		SoundManeger->getSelectSE();
+		if (HowToPage > 2) { HowToPage = 2; }
+	}
 
 	if (isTrigger(KEY_X)) { HowToPage = 0; return true; }
 	else return false;

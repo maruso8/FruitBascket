@@ -49,7 +49,7 @@ FALL_MANEGER::FALL_MANEGER() {
 	for (i = 0; i < C->getIData("NumROrange"); i++) { AllFall[j++] = new ROT_ORANGE("rOrange"); }
 	for (i = 0; i < C->getIData("NumClockUp"); i++) { AllFall[j++] = new CLOCK_UP("clockUp"); }
 	for (i = 0; i < C->getIData("NumShoesUp"); i++) { AllFall[j++] = new SHOES_UP("shoesUp"); }
-	for (i = 0; i < C->getIData("NumClockDn"); i++) { AllFall[j++] = new CLOCK_DOWN("clockDn"); }
+	for (i = 0; i < C->getIData("NumClockDn"); i++) {		AllFall[j++] = new CLOCK_DOWN("clockDn"); }
 	for (i = 0; i < C->getIData("NumShoesDn"); i++) { AllFall[j++] = new SHOES_DOWN("shoesDn"); }
 	for (i = 0; i < C->getIData("NumTomato"); i++) { AllFall[j++] = new TOMATO("tomato"); }
 	for (i = 0; i < C->getIData("NumChest"); i++) { AllFall[j++] = new CHESTNUT("chest"); }

@@ -1,1 +1,55 @@
 MYICON      ICON    "../framework/joypad.ico"
+
+
+//リソースのパッケージ化
+//画像関係
+//フルーツ&アイテム
+apple    IMAGE   "./data/2dgraphics/apple.png"
+berry    IMAGE   "./data/2dgraphics/berry.png"
+orange   IMAGE   "./data/2dgraphics/orange.png"
+banana   IMAGE   "./data/2dgraphics/banana.png"
+rApple   IMAGE  "./data/2dgraphics/rApple.png"
+rOrange  IMAGE   "./data/2dgraphics/rOrange.png"
+clockUp  IMAGE   "./data/2dgraphics/clockUp.png"
+clockDn  IMAGE   "./data/2dgraphics/clockDn.png"
+shoesUp  IMAGE   "./data/2dgraphics/shoesUp.png"
+shoesDn  IMAGE   "./data/2dgraphics/shoesDn.png"
+tomato   IMAGE   "./data/2dgraphics/tomato.png"
+chest    IMAGE   "./data/2dgraphics/chest.png"
+needle   IMAGE   "./data/2dgraphics/needle.png"
+durian   IMAGE   "./data/2dgraphics/durian.png"
+
+
+
+//タイトル画面関係
+TitelBack   IMAGE   "./data/2dgraphics/Titelback.png"
+Titel       IMAGE   "./data/2dgraphics/Titel.png"
+SelectBack  IMAGE   "./data/2dgraphics/SelectBack.png"
+Select_0    IMAGE   "./data/2dgraphics/Select_0.png"
+Select_1    IMAGE   "./data/2dgraphics/Select_1.png"
+Select_2    IMAGE   "./data/2dgraphics/Select_2.png"
+Select_3    IMAGE   "./data/2dgraphics/Select_3.png"
+LevelBack   IMAGE   "./data/2dgraphics/LevelBack.png"
+Lv_0        IMAGE   "./data/2dgraphics/Lv_0.png"
+Lv_1        IMAGE   "./data/2dgraphics/Lv_1.png"
+Lv_2        IMAGE   "./data/2dgraphics/Lv_2.png"
+Arrow       IMAGE   "./data/2dgraphics/Arrow.png"
+HowTo_0     IMAGE   "./data/2dgraphics/HowTo_0.png"
+HowTo_1     IMAGE   "./data/2dgraphics/HowTo_1.png"
+HowTo_2     IMAGE   "./data/2dgraphics/HowTo_2.png"
+Credit      IMAGE   "./data/2dgraphics/Credit.png"
+HowToBack   IMAGE   "./data/2dgraphics/HowToBack.png"
+//ゲーム画面
+GameBack    IMAGE   "./data/2dgraphics/gameBack.png"
+Player      IMAGE   "./data/2dgraphics/Player.png"
+PlayerL     IMAGE   "./data/2dgraphics/PlayerL.png"
+PlayerR     IMAGE   "./data/2dgraphics/PlayerR.png"
+Score       IMAGE   "./data/2dgraphics/score.png"
+Number      IMAGE   "./data/2dgraphics/Number.png"
+No.0        IMAGE   "./data/2dgraphics/No.1.png"
+No.1        IMAGE   "./data/2dgraphics/No.2.png"
+No.2        IMAGE   "./data/2dgraphics/No.3.png"
+Scoreback   IMAGE   "./data/2dgraphics/ScoreBack.png"
+
+//その他
+Fade        IMAGE   "./data/2dgraphics/Fade.png"
